@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro y Pago | Jurintegra S.A.C.</title>
+    <style>
+        :root {
+            --color-morado: #6A1B9A; 
+            --color-verde: #2E7D32; 
+            --color-fondo: #F5F7FA;
+            --color-blanco: #FFFFFF;
+            --color-texto: #333333;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--color-fondo); color: var(--color-texto); line-height: 1.6; }
+        
+        header { background-color: var(--color-blanco); padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo { font-size: 24px; font-weight: bold; color: var(--color-morado); text-decoration: none; }
+
+        .checkout-container {
+            max-width: 1000px; margin: 40px auto; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; padding: 0 20px;
+        }
+        
+        .panel { background: var(--color-blanco); padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .panel h2 { color: var(--color-morado); margin-bottom: 20px; font-size: 1.5rem; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-row { display: flex; gap: 15px; }
+        .form-row .form-group { flex: 1; }
+        
+        label { display: block; font-weight: 500; margin-bottom: 5px; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1rem; }
+        
+        .resumen-orden { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #eee; }
+        .resumen-item { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .total { font-size: 1.5rem; font-weight: bold; color: var(--color-verde); margin-top: 15px; border-top: 2px solid #ddd; padding-top: 15px; display: flex; justify-content: space-between;}
+        
+        .btn {
+            background-color: var(--color-verde); color: var(--color-blanco); padding: 15px;
+            border: none; border-radius: 5px; font-size: 1.1rem; font-weight: bold;
+            cursor: pointer; width: 100%; transition: 0.3s; margin-top: 20px;
+        }
+        .btn:hover { background-color: #1b5e20; }
+        
+        .seguridad-nota { font-size: 0.8rem; color: #666; text-align: center; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 5px; }
+
+        @media (max-width: 768px) {
+            .checkout-container { grid-template-columns: 1fr; }
+            .form-row { flex-direction: column; gap: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">❖ JURINTEGRA</a>
+    </header>
+
+    <div class="checkout-container">
+        <!-- Formulario de Datos -->
+        <div class="panel">
+            <h2>1. Datos de la Cuenta</h2>
+            <form id="registroForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre Completo o Razón Social *</label>
+                        <input type="text" id="nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="doc">DNI / RUC *</label>
+                        <input type="text" id="doc" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Crear Contraseña *</label>
+                        <input type="password" id="password" required>
+                    </div>
+                </div>
+
+                <h2 style="margin-top: 30px;">2. Método de Pago</h2>
+                <div class="form-group">
+                    <label for="tarjeta">Número de Tarjeta</label>
+                    <input type="text" id="tarjeta" placeholder="0000 0000 0000 0000" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vencimiento">Vencimiento (MM/AA)</label>
+                        <input type="text" id="vencimiento" placeholder="MM/AA" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123" required>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Resumen de Orden -->
+        <div class="panel" style="height: fit-content;">
+            <h2>Resumen del Pedido</h2>
+            <div class="resumen-orden">
+                <div class="form-group">
+                    <label for="planSelect">Plan Seleccionado:</label>
+                    <select id="planSelect" onchange="actualizarPrecio()">
+                        <option value="75">Plan Básico</option>
+                        <option value="175" selected>Plan Normal</option>
+                        <option value="375">Plan Premium</option>
+                    </select>
+                </div>
+                <div class="resumen-item">
+                    <span>Subtotal</span>
+                    <span id="subtotal">S/ 175.00</span>
+                </div>
+                <div class="resumen-item" style="color: var(--color-verde); font-size: 0.9rem;">
+                    <span>Descuento Lanzamiento (50%)</span>
+                    <span>- S/ 87.50</span>
+                </div>
+                <div class="total">
+                    <span>Total a Pagar</span>
+                    <span id="totalPago">S/ 87.50</span>
+                </div>
+            </div>
+            
+            <button type="submit" form="registroForm" class="btn">Pagar y Crear Cuenta</button>
+            <p class="seguridad-nota">🔒 Transacción encriptada y segura de extremo a extremo.</p>
+        </div>
+    </div>
+
+    <script>
+        function actualizarPrecio() {
+            const select = document.getElementById('planSelect');
+            const precioBase = parseFloat(select.value);
+            const descuento = precioBase * 0.5;
+            const total = precioBase - descuento;
+
+            document.getElementById('subtotal').innerText = 'S/ ' + precioBase.toFixed(2);
+            document.getElementById('totalPago').innerText = 'S/ ' + total.toFixed(2);
+            
+            // Actualizar visualmente el descuento
+            const elementosDescuento = document.querySelectorAll('.resumen-item')[1].querySelectorAll('span');
+            elementosDescuento[1].innerText = '- S/ ' + descuento.toFixed(2);
+        }
+
+        document.getElementById('registroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("¡Pago procesado exitosamente!\n\nBienvenido a JURINTEGRA S.A.C. Serás redirigido a tu panel de usuario.");
+            window.location.href = 'dashboard.html';
+        });
+    </script>
+</body>
+</html>

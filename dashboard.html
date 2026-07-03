@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Usuario | Jurintegra S.A.C.</title>
+    <style>
+        :root {
+            --color-morado: #6A1B9A; 
+            --color-verde: #2E7D32; 
+            --color-gris-claro: #F4F6F8;
+            --color-borde: #E0E0E0;
+            --color-texto: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { display: flex; height: 100vh; background-color: var(--color-gris-claro); color: var(--color-texto); }
+
+        /* Barra Lateral (Sidebar) */
+        .sidebar {
+            width: 260px; background-color: var(--color-morado); color: white;
+            display: flex; flex-direction: column; padding: 20px 0;
+        }
+        .sidebar h2 { text-align: center; margin-bottom: 30px; font-size: 1.4rem; letter-spacing: 1px; }
+        .sidebar button {
+            background: none; border: none; width: 100%; text-align: left;
+            color: rgba(255,255,255,0.8); padding: 15px 20px; font-size: 1rem;
+            cursor: pointer; transition: 0.3s; border-left: 4px solid transparent;
+        }
+        .sidebar button:hover, .sidebar button.active {
+            background-color: rgba(255,255,255,0.1); color: white; border-left: 4px solid var(--color-verde);
+        }
+        .logout { margin-top: auto; background-color: #C62828 !important; color: white !important; display: block; text-align: center; text-decoration: none; padding: 15px;}
+
+        /* Contenido Principal */
+        .main-content { flex: 1; padding: 40px; overflow-y: auto; }
+        
+        .header-dashboard {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;
+            border-bottom: 1px solid var(--color-borde); padding-bottom: 20px;
+        }
+        
+        /* Vistas (para cambiar entre pestañas) */
+        .view-section { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Tarjetas de Resumen */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
+        .stat-card {
+            background: white; padding: 20px; border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 5px solid var(--color-verde);
+        }
+        .stat-card h3 { color: #777; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-card p { font-size: 2.2rem; font-weight: bold; color: var(--color-morado); margin-top: 5px; }
+
+        /* Área de Carga */
+        .upload-section { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 30px;}
+        .upload-section h2 { font-size: 1.3rem; margin-bottom: 15px; color: var(--color-morado); }
+        .upload-box {
+            border: 2px dashed var(--color-morado); padding: 30px; border-radius: 8px;
+            text-align: center; cursor: pointer; transition: 0.3s; background-color: #FAF8FB;
+        }
+        .upload-box:hover { background-color: #F3E5F5; }
+        .progress-container { width: 100%; background-color: #eee; border-radius: 5px; margin-top: 15px; display: none; }
+        .progress-bar { width: 0%; height: 8px; background-color: var(--color-verde); border-radius: 5px; transition: width 0.1s; }
+        .progress-text { font-size: 0.85rem; color: var(--color-verde); font-weight: bold; margin-top: 5px; display: none; }
+
+        /* Tablas */
+        .table-container { background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-top: 20px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 15px 20px; text-align: left; font-size: 0.95rem; }
+        th { background-color: var(--color-morado); color: white; font-weight: 600; }
+        td { border-bottom: 1px solid var(--color-borde); }
+        tr:last-child td { border-bottom: none; }
+        
+        /* Estados */
+        .status { padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; display: inline-block; }
+        .status.blockchain { background-color: #E8F5E9; color: var(--color-verde); }
+        .status.pendiente { background-color: #FFF3E0; color: #E65100; }
+        .status.no-req { background-color: #EEEEEE; color: #666666; }
+        .status.rechazado { background-color: #FFEBEE; color: #C62828; }
+        
+        .hash-code { font-family: 'Courier New', Courier, monospace; font-size: 0.85rem; color: #555; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        
+        <h2><a href="index.html" class="logo"><img src="logo.jpg" alt="Logo Jurintegra" style="height: 35px; margin-right: 10px;"></a>JURINTEGRA</h2>
+        <button class="nav-btn active" onclick="cambiarVista('vista-resumen', this)">Resumen de Cuenta</button>
+        <button class="nav-btn" onclick="cambiarVista('vista-documentos', this)">Mis Documentos</button>
+        <button class="nav-btn" onclick="cambiarVista('vista-validaciones', this)">Validaciones Psicológicas</button>
+        <button class="nav-btn" onclick="cambiarVista('vista-facturacion', this)">Facturación e Historial</button>
+        <a href="index.html" class="logout">Cerrar Sesión</a>
+    </nav>
+
+    <main class="main-content">
+        <div class="header-dashboard">
+            <div>
+                <h1>Panel de Control</h1>
+                <p style="color: #666;">Bienvenido, <strong>Empresa S.A.C.</strong></p>
+            </div>
+            <div style="text-align: right;">
+                <p>Plan Actual: <span style="color: var(--color-morado); font-weight: bold;">Normal</span></p>
+            </div>
+        </div>
+
+        <div id="vista-resumen" class="view-section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Documentos Protegidos</h3>
+                    <p id="countDocs">2</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Validaciones Realizadas</h3>
+                    <p>1</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Créditos Psicológicos</h3>
+                    <p>1 / 1 Disp.</p>
+                </div>
+            </div>
+
+            <div class="upload-section">
+                <h2>Registrar y Encriptar Nuevo Documento</h2>
+                <input type="file" id="fileInput" style="display: none;" onchange="archivoSeleccionado(this)">
+                <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+                    <p>📂 Haz clic aquí para seleccionar un contrato o documento (PDF, Word)</p>
+                    <span>El archivo se procesará localmente antes del sellado Blockchain.</span>
+                </div>
+                <div style="margin-top: 15px;">
+                    <label><input type="checkbox" id="reqPsicologia"> Requerir Validación Psicológica del Consentimiento</label>
+                </div>
+                <div class="progress-container" id="progressContainer">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <div class="progress-text" id="progressText"></div>
+            </div>
+        </div>
+
+        <div id="vista-documentos" class="view-section">
+            <h2 style="color: var(--color-morado); margin-bottom: 10px;">Bóveda Digital Blockchain</h2>
+            <p style="margin-bottom: 20px;">Aquí se encuentra el registro inmutable de todos tus documentos legales.</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre del Documento</th>
+                            <th>Fecha</th>
+                            <th>Hash SHA-256 (Blockchain)</th>
+                            <th>Certificado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaDocs">
+                        <tr>
+                            <td>Acuerdo_Socios_V2.pdf</td>
+                            <td>28/06/2026</td>
+                            <td><span class="hash-code">a9f82d...e312bc</span></td>
+                            <td><a href="#" style="color: var(--color-verde);">Descargar Certificado</a></td>
+                        </tr>
+                        <tr>
+                            <td>Contrato_Arrendamiento.pdf</td>
+                            <td>01/07/2026</td>
+                            <td><span class="hash-code">4b8e11...9a2f5d</span></td>
+                            <td><a href="#" style="color: var(--color-verde);">Descargar Certificado</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="vista-validaciones" class="view-section">
+            <h2 style="color: var(--color-morado); margin-bottom: 10px;">Gestión de Consentimiento Informado</h2>
+            <p style="margin-bottom: 20px;">Administra las citas y resultados de las evaluaciones psicológicas de tus firmantes.</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Documento Asociado</th>
+                            <th>Firmante a Evaluar</th>
+                            <th>Estado de Evaluación</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Acuerdo_Socios_V2.pdf</td>
+                            <td>Juan Pérez</td>
+                            <td><span class="status blockchain">Aprobado - Plena Capacidad</span></td>
+                            <td><span style="color: #888;">Completado</span></td>
+                        </tr>
+                        <tr>
+                            <td>Poder_Notarial_Testamento.pdf</td>
+                            <td>María González</td>
+                            <td><span class="status pendiente">Cita Programada: 05/07/2026</span></td>
+                            <td><a href="#" style="color: var(--color-morado); font-weight: bold;">Unirse a Videollamada</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="vista-facturacion" class="view-section">
+            <h2 style="color: var(--color-morado); margin-bottom: 10px;">Facturación y Pagos</h2>
+            <p style="margin-bottom: 20px;">Plan Normal (Renueva el 01/08/2026). Tarjeta vinculada: **** **** **** 4589</p>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N° de Factura</th>
+                            <th>Fecha</th>
+                            <th>Concepto</th>
+                            <th>Monto</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>F001-000458</td>
+                            <td>01/07/2026</td>
+                            <td>Suscripción Mensual - Plan Normal</td>
+                            <td>S/ 175.00</td>
+                            <td><span class="status blockchain">Pagado</span></td>
+                        </tr>
+                        <tr>
+                            <td>F001-000302</td>
+                            <td>01/06/2026</td>
+                            <td>Suscripción Mensual - Plan Normal</td>
+                            <td>S/ 175.00</td>
+                            <td><span class="status blockchain">Pagado</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // FUNCIÓN 1: Navegación entre pestañas (SPA)
+        function cambiarVista(idVista, botonClickeado) {
+            // 1. Ocultar todas las vistas
+            let vistas = document.querySelectorAll('.view-section');
+            vistas.forEach(vista => vista.classList.remove('active'));
+
+            // 2. Quitar la clase "active" de todos los botones del menú
+            let botones = document.querySelectorAll('.nav-btn');
+            botones.forEach(btn => btn.classList.remove('active'));
+
+            // 3. Mostrar la vista seleccionada y activar el botón
+            document.getElementById(idVista).classList.add('active');
+            botonClickeado.classList.add('active');
+        }
+
+        // FUNCIÓN 2: Simulador de carga de Blockchain
+        function archivoSeleccionado(input) {
+            if (input.files.length === 0) return;
+            
+            const file = input.files[0];
+            const pBar = document.getElementById('progressBar');
+            const pContainer = document.getElementById('progressContainer');
+            const pText = document.getElementById('progressText');
+            
+            pContainer.style.display = 'block';
+            pText.style.display = 'block';
+            let porcentaje = 0;
+            
+            const intervalo = setInterval(() => {
+                porcentaje += 5;
+                pBar.style.width = porcentaje + '%';
+                
+                if (porcentaje < 40) {
+                    pText.innerText = `Subiendo y encriptando "${file.name}"... ${porcentaje}%`;
+                } else if (porcentaje < 80) {
+                    pText.innerText = `Calculando Hash SHA-256... ${porcentaje}%`;
+                } else if (porcentaje < 100) {
+                    pText.innerText = `Distribuyendo en nodos Blockchain... ${porcentaje}%`;
+                } else {
+                    clearInterval(intervalo);
+                    pText.innerText = "¡Documento asegurado con éxito en la red!";
+                    pText.style.color = "var(--color-verde)";
+                    
+                    agregarFilaTabla(file.name);
+                    
+                    setTimeout(() => {
+                        pContainer.style.display = 'none';
+                        pText.style.display = 'none';
+                        pText.style.color = "var(--color-verde)";
+                        document.getElementById('fileInput').value = "";
+                        pBar.style.width = '0%';
+                    }, 3000);
+                }
+            }, 150);
+        }
+
+        // FUNCIÓN 3: Agregar documento a la tabla
+        function agregarFilaTabla(nombreArchivo) {
+            const tabla = document.getElementById('tablaDocs');
+            const contador = document.getElementById('countDocs');
+            
+            const caracteres = 'abcdef0123456789';
+            let hash = '';
+            for (let i = 0; i < 6; i++) hash += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+            hash += '...';
+            for (let i = 0; i < 6; i++) hash += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+            
+            const hoy = new Date();
+            const fechaString = `${String(hoy.getDate()).padStart(2, '0')}/${String(hoy.getMonth() + 1).padStart(2, '0')}/2026`;
+
+            const nuevaFila = `
+                <tr>
+                    <td>${nombreArchivo}</td>
+                    <td>${fechaString}</td>
+                    <td><span class="hash-code">${hash}</span></td>
+                    <td><a href="#" style="color: var(--color-verde);">Generando...</a></td>
+                </tr>
+            `;
+            
+            tabla.insertAdjacentHTML('afterbegin', nuevaFila);
+            contador.innerText = parseInt(contador.innerText) + 1;
+        }
+    </script>
+</body>
+</html>

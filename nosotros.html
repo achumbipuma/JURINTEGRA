@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros | Jurintegra S.A.C.</title>
+    <style>
+        :root {
+            --color-morado: #6A1B9A; 
+            --color-verde: #2E7D32; 
+            --color-fondo: #F5F7FA;
+            --color-blanco: #FFFFFF;
+            --color-texto: #333333;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--color-fondo); color: var(--color-texto); line-height: 1.6; }
+
+        /* --- Header y Menú Móvil --- */
+        header { background-color: var(--color-blanco); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; max-width: 1200px; margin: 0 auto; }
+        .logo { display: flex; align-items: center; font-size: 24px; font-weight: bold; color: var(--color-morado); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 20px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--color-texto); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--color-morado); }
+        .btn-login { background-color: var(--color-morado); color: white !important; padding: 8px 20px; border-radius: 5px; font-weight: bold; transition: 0.3s; }
+        .btn-login:hover { background-color: #4a148c; }
+
+        .menu-toggle { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; background: transparent; border: none; cursor: pointer; z-index: 1001; }
+        .menu-toggle span { width: 100%; height: 3px; background-color: var(--color-morado); border-radius: 10px; transition: 0.3s; }
+
+        /* --- Hero de Nosotros --- */
+        .about-hero { text-align: center; padding: 80px 5%; background: linear-gradient(135deg, var(--color-morado), #4a148c); color: white; }
+        .about-hero h1 { font-size: 3rem; margin-bottom: 15px; }
+        .about-hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.9; }
+
+        /* --- Grid de Identidad --- */
+        .identity-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1100px; margin: 60px auto; padding: 0 5%; }
+        .identity-card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); text-align: center; border-bottom: 4px solid var(--color-verde); transition: 0.3s; }
+        .identity-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .identity-icon { font-size: 3rem; margin-bottom: 20px; }
+        .identity-card h3 { color: var(--color-morado); margin-bottom: 15px; font-size: 1.5rem; }
+        .identity-card p { color: #666; font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            .nav-links { position: absolute; top: 70px; right: 0; background-color: var(--color-blanco); width: 100%; height: 0; flex-direction: column; align-items: center; overflow: hidden; transition: 0.3s; box-shadow: 0 10px 10px rgba(0,0,0,0.1); }
+            .nav-links.active { height: 320px; }
+            .nav-links a { display: block; padding: 15px 0; width: 100%; text-align: center; border-bottom: 1px solid #eee; }
+            .btn-login { margin: 15px auto; width: 80%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="Logo Jurintegra" style="height: 35px; margin-right: 10px; border-radius: 8px;"> 
+                JURINTEGRA
+            </a>
+            <button class="menu-toggle" id="mobile-menu-btn"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="nosotros.html" style="color: var(--color-morado); font-weight: bold;">Nosotros</a></li>
+                <li><a href="servicios.html">Cómo Funciona</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="login.html" class="btn-login">Ingresar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="about-hero">
+        <h1>Transformando la Seguridad Legal</h1>
+        <p>Somos pioneros en la integración de tecnología Blockchain y evaluación psicológica para garantizar transacciones inquebrantables.</p>
+    </div>
+
+    <div class="identity-grid">
+        <div class="identity-card">
+            <div class="identity-icon">🎯</div>
+            <h3>Nuestra Misión</h3>
+            <p>Proporcionar seguridad jurídica absoluta a empresas y personas mediante la inmutabilidad tecnológica y la certeza de la voluntad humana, eliminando el riesgo de fraude en contratos y acuerdos.</p>
+        </div>
+        <div class="identity-card">
+            <div class="identity-icon">👁️</div>
+            <h3>Nuestra Visión</h3>
+            <p>Ser el estándar nacional y regional en validación de documentos digitales, logrando que el "Sello Jurintegra" sea sinónimo de transparencia, innovación y confianza legal irrefutable.</p>
+        </div>
+        <div class="identity-card">
+            <div class="identity-icon">⚖️</div>
+            <h3>Nuestros Valores</h3>
+            <p>Operamos bajo principios de <strong>Confidencialidad</strong> extrema, <strong>Innovación</strong> constante, <strong>Ética</strong> profesional irrestricta y un fuerte compromiso con la <strong>Evolución Legal</strong>.</p>
+        </div>
+    </div>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        mobileMenuBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
+    </script>
+</body>
+</html>
