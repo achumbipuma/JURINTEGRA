@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Jurintegra S.A.C.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-morado: #6A1B9A;
+            --color-morado-dark: #4a148c;
+            --color-verde: #2E7D32;
+            --color-fondo: #F5F7FA;
+            --color-blanco: #FFFFFF;
+            --color-texto: #2d2d2d;
+            --color-borde: #E0E0E0;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,0.14);
+            --radius: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:var(--color-fondo); color:var(--color-texto); line-height:1.65; font-family:'Inter','Segoe UI',sans-serif; }
+
+        header { background:var(--color-blanco); box-shadow:var(--shadow-sm); position:sticky; top:0; z-index:1000; }
+        nav { display:flex; justify-content:space-between; align-items:center; padding:16px 5%; max-width:1200px; margin:0 auto; }
+        .logo { display:flex; align-items:center; font-size:22px; font-weight:800; color:var(--color-morado); text-decoration:none; gap:10px; }
+        .logo img { height:38px; border-radius:6px; }
+        .nav-links { list-style:none; display:flex; gap:8px; align-items:center; }
+        .nav-links a { text-decoration:none; color:var(--color-texto); font-weight:500; font-size:.92rem; padding:8px 12px; border-radius:6px; transition:.2s; }
+        .nav-links a:hover { background:#f3e5f5; color:var(--color-morado); }
+        .btn-login { background:var(--color-morado)!important; color:white!important; padding:8px 20px!important; border-radius:8px!important; font-weight:700!important; }
+        .menu-toggle { display:none; flex-direction:column; justify-content:space-around; width:28px; height:24px; background:transparent; border:none; cursor:pointer; }
+        .menu-toggle span { width:100%; height:2.5px; background:var(--color-morado); border-radius:10px; }
+
+        /* HERO */
+        .contact-hero {
+            position:relative; padding:80px 5% 60px;
+            background:
+                linear-gradient(135deg, rgba(74,20,140,0.87), rgba(106,27,154,0.8)),
+                url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1200&q=80&auto=format&fit=crop') center/cover no-repeat;
+            color:white; text-align:center;
+        }
+        .contact-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:60px; background:linear-gradient(to top, var(--color-fondo), transparent); }
+        .contact-hero h1 { font-size:clamp(2rem,4vw,2.8rem); font-weight:800; margin-bottom:14px; }
+        .contact-hero p { font-size:1.05rem; opacity:.9; max-width:520px; margin:0 auto; font-weight:300; }
+
+        /* MAIN LAYOUT */
+        .contact-section { padding:70px 5%; }
+        .contact-inner { max-width:1100px; margin:0 auto; }
+        .contact-grid {
+            display:flex; background:var(--color-blanco);
+            border-radius:var(--radius); box-shadow:var(--shadow-lg); overflow:hidden;
+        }
+
+        /* INFO PANEL */
+        .contact-info {
+            flex:1; padding:50px;
+            background: linear-gradient(160deg, var(--color-morado), var(--color-morado-dark));
+            color:white; display:flex; flex-direction:column; gap:28px;
+            position:relative; overflow:hidden;
+        }
+        .contact-info::before {
+            content:''; position:absolute; top:-60px; right:-60px;
+            width:200px; height:200px; border-radius:50%;
+            background:rgba(255,255,255,0.06);
+        }
+        .contact-info::after {
+            content:''; position:absolute; bottom:-40px; left:-40px;
+            width:140px; height:140px; border-radius:50%;
+            background:rgba(255,255,255,0.04);
+        }
+        .contact-info-header h2 { font-size:1.7rem; font-weight:800; margin-bottom:8px; }
+        .contact-info-header p { opacity:.85; font-size:.95rem; }
+        .info-item { display:flex; align-items:center; gap:12px; font-size:1rem; position:relative; z-index:1; }
+        .info-item .info-icon { width:40px; height:40px; background:rgba(255,255,255,.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.2rem; }
+        .info-item .info-text { font-size:.95rem; opacity:.92; }
+        .contact-office-img { border-radius:10px; overflow:hidden; flex-shrink:0; }
+        .contact-office-img img { width:100%; height:160px; object-fit:cover; display:block; }
+
+        /* FORM PANEL */
+        .contact-form { flex:1.5; padding:50px; }
+        .contact-form h3 { color:var(--color-morado); margin-bottom:24px; font-size:1.5rem; font-weight:800; }
+        .input-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+        .input-group { margin-bottom:20px; }
+        .input-group label { display:block; margin-bottom:8px; font-weight:600; font-size:.88rem; color:#444; text-transform:uppercase; letter-spacing:.5px; }
+        .input-group input, .input-group textarea, .input-group select {
+            width:100%; padding:13px 16px; border:1.5px solid var(--color-borde);
+            border-radius:8px; font-size:.97rem; transition:.3s; font-family:inherit; background:#fafafa;
+        }
+        .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
+            border-color:var(--color-morado); outline:none; box-shadow:0 0 0 3px rgba(106,27,154,.1); background:white;
+        }
+        .btn-submit {
+            background:var(--color-verde); color:white; padding:15px 32px;
+            border:none; border-radius:8px; font-weight:800; font-size:1rem;
+            cursor:pointer; transition:.3s; width:100%; font-family:inherit;
+        }
+        .btn-submit:hover { background:#1b5e20; transform:translateY(-2px); box-shadow:0 6px 20px rgba(46,125,50,.35); }
+        #successMsg {
+            display:none; padding:24px; background:#e8f5e9; color:#2E7D32;
+            border-radius:10px; text-align:center; border:1.5px solid #c8e6c9; font-weight:600;
+        }
+
+        footer { background:#1a1a2e; color:rgba(255,255,255,.75); padding:40px 5% 24px; }
+        .footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-size:1.2rem; font-weight:800; color:white; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { color:rgba(255,255,255,.65); text-decoration:none; font-size:.9rem; transition:.2s; }
+        .footer-links a:hover { color:white; }
+        .footer-copy { text-align:center; font-size:.85rem; border-top:1px solid rgba(255,255,255,.1); padding-top:20px; max-width:1200px; margin:24px auto 0; }
+
+        @media(max-width:900px){
+            .input-row { grid-template-columns:1fr; }
+        }
+        @media(max-width:768px){
+            .menu-toggle{display:flex;}
+            .nav-links{position:absolute;top:70px;left:0;right:0;background:white;flex-direction:column;gap:0;height:0;overflow:hidden;transition:height .3s;box-shadow:var(--shadow-md);}
+            .nav-links.active{height:310px;}
+            .nav-links li{width:100%;text-align:center;border-bottom:1px solid #f0f0f0;}
+            .nav-links a{display:block;padding:14px 0;}
+            .contact-grid{flex-direction:column;}
+            .contact-info,.contact-form{padding:32px 24px;}
+            .contact-office-img{display:none;}
+            .footer-inner{flex-direction:column;text-align:center;}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.jpg" alt="Logo Jurintegra"> JURINTEGRA</a>
+            <button class="menu-toggle" id="mobile-menu-btn"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="servicios.html">Cómo Funciona</a></li>
+                <li><a href="contacto.html" style="color:var(--color-morado);font-weight:700;">Contacto</a></li>
+                <li><a href="login.html" class="btn-login">Ingresar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="contact-hero">
+        <h1>Comunícate con Nosotros</h1>
+        <p>¿Tienes dudas sobre cómo proteger tus documentos con Blockchain? Estamos aquí para asesorarte.</p>
+    </div>
+
+    <section class="contact-section">
+        <div class="contact-inner">
+            <div class="contact-grid">
+                <!-- PANEL IZQUIERDO -->
+                <div class="contact-info">
+                    <div class="contact-info-header">
+                        <h2>Información de Contacto</h2>
+                        <p>Respondemos toda consulta en menos de 24 horas hábiles.</p>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">Lima, Perú</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div class="info-text">soporte@jurintegra.com.pe</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">+51 987 654 321</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">⏰</div>
+                        <div class="info-text">Lun – Vie: 9:00 AM – 6:00 PM</div>
+                    </div>
+                    <div class="contact-office-img">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=500&q=80&auto=format&fit=crop" alt="Oficinas de Jurintegra en Lima">
+                    </div>
+                </div>
+
+                <!-- PANEL DERECHO -->
+                <div class="contact-form">
+                    <h3>Envíanos un Mensaje</h3>
+                    <form id="contactForm">
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label>Nombre</label>
+                                <input type="text" placeholder="Ej. Juan Pérez" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Empresa (opcional)</label>
+                                <input type="text" placeholder="Tu empresa">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Correo Electrónico</label>
+                            <input type="email" placeholder="ejemplo@empresa.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Tipo de Consulta</label>
+                            <select>
+                                <option>Información sobre planes</option>
+                                <option>Soporte técnico</option>
+                                <option>Validación psicológica</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>¿En qué podemos ayudarte?</label>
+                            <textarea rows="5" placeholder="Describe tu consulta aquí..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">✉️ Enviar Mensaje</button>
+                    </form>
+                    <div id="successMsg">
+                        ✅ ¡Gracias por escribirnos! Hemos recibido tu mensaje de forma segura. Un asesor de Jurintegra se comunicará contigo en breve.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">⚖️ JURINTEGRA S.A.C.</div>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="faq.html">FAQ</a>
+                <a href="legales.html">Términos</a>
+            </div>
+        </div>
+        <div class="footer-copy">© 2026 JURINTEGRA S.A.C. Todos los derechos reservados. Lima, Perú</div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Usuario | Jurintegra S.A.C.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-morado: #6A1B9A;
+            --color-morado-dark: #4a148c;
+            --color-morado-light: #f3e5f5;
+            --color-verde: #2E7D32;
+            --color-verde-light: #e8f5e9;
+            --color-rojo: #C62828;
+            --color-amarillo: #F9A825;
+            --bg: #f0f2f7;
+            --sidebar-w: 260px;
+            --card-bg: #ffffff;
+            --borde: #e8e8ee;
+            --texto: #2d2d2d;
+            --texto-light: #7a7a9d;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 6px 20px rgba(0,0,0,0.09);
+            --radius: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { display:flex; height:100vh; background:var(--bg); color:var(--texto); font-family:'Inter','Segoe UI',sans-serif; overflow:hidden; }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width:var(--sidebar-w); flex-shrink:0;
+            background: linear-gradient(180deg, var(--color-morado-dark) 0%, var(--color-morado) 100%);
+            display:flex; flex-direction:column;
+            padding:0 0 20px;
+            position:relative; overflow:hidden;
+        }
+        /* decorative circles on sidebar */
+        .sidebar::before {
+            content:''; position:absolute; width:220px; height:220px; border-radius:50%;
+            background:rgba(255,255,255,0.05); top:-60px; right:-60px; pointer-events:none;
+        }
+        .sidebar::after {
+            content:''; position:absolute; width:160px; height:160px; border-radius:50%;
+            background:rgba(255,255,255,0.04); bottom:60px; left:-50px; pointer-events:none;
+        }
+
+        .sidebar-logo {
+            padding:28px 20px 20px;
+            display:flex; align-items:center; gap:10px;
+            text-decoration:none; color:white;
+            border-bottom:1px solid rgba(255,255,255,0.1);
+            margin-bottom:16px;
+        }
+        .sidebar-logo img { height:34px; border-radius:6px; }
+        .sidebar-logo span { font-size:1.15rem; font-weight:800; letter-spacing:-.3px; }
+
+        /* User avatar in sidebar */
+        .sidebar-user {
+            padding:0 16px 20px;
+            display:flex; align-items:center; gap:10px;
+            border-bottom:1px solid rgba(255,255,255,0.1);
+            margin-bottom:16px;
+        }
+        .user-avatar {
+            width:38px; height:38px; border-radius:50%;
+            background:rgba(255,255,255,0.2);
+            display:flex; align-items:center; justify-content:center;
+            font-weight:800; font-size:1rem; color:white; flex-shrink:0;
+        }
+        .user-info { overflow:hidden; }
+        .user-name { font-size:.85rem; font-weight:700; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .user-plan { font-size:.72rem; color:rgba(255,255,255,.6); }
+        .online-dot { width:8px; height:8px; background:#4caf50; border-radius:50%; flex-shrink:0; margin-left:auto; box-shadow:0 0 0 2px rgba(76,175,80,.3); }
+
+        /* Nav buttons */
+        .sidebar-nav { flex:1; display:flex; flex-direction:column; padding:0 10px; gap:4px; }
+        .nav-btn {
+            background:none; border:none; width:100%; text-align:left;
+            color:rgba(255,255,255,.72); padding:12px 14px;
+            font-size:.88rem; cursor:pointer; border-radius:9px;
+            transition:.2s; display:flex; align-items:center; gap:11px;
+            font-family:inherit; font-weight:500; position:relative; z-index:1;
+        }
+        .nav-btn .nav-icon { font-size:1.1rem; width:20px; text-align:center; }
+        .nav-btn:hover { background:rgba(255,255,255,.1); color:white; }
+        .nav-btn.active { background:rgba(255,255,255,.18); color:white; font-weight:700; }
+        .nav-btn.active::before {
+            content:''; position:absolute; left:0; top:50%; transform:translateY(-50%);
+            height:60%; width:3px; background:#4caf50; border-radius:0 4px 4px 0;
+        }
+        .nav-section-label {
+            font-size:.68rem; font-weight:700; color:rgba(255,255,255,.35);
+            text-transform:uppercase; letter-spacing:1.5px;
+            padding:14px 14px 6px; position:relative; z-index:1;
+        }
+
+        .sidebar-bottom { padding:0 10px; position:relative; z-index:1; }
+        .logout-btn {
+            display:flex; align-items:center; gap:10px;
+            padding:12px 14px; border-radius:9px;
+            background:rgba(198,40,40,.2); color:rgba(255,150,150,1);
+            text-decoration:none; font-size:.88rem; font-weight:600;
+            transition:.2s; width:100%;
+        }
+        .logout-btn:hover { background:rgba(198,40,40,.35); }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+
+        /* Top bar */
+        .topbar {
+            height:68px; background:white; border-bottom:1px solid var(--borde);
+            display:flex; align-items:center; justify-content:space-between;
+            padding:0 32px; flex-shrink:0; box-shadow:var(--shadow-sm);
+        }
+        .topbar-left h1 { font-size:1.25rem; font-weight:800; }
+        .topbar-left p { font-size:.8rem; color:var(--texto-light); margin-top:1px; }
+        .topbar-right { display:flex; align-items:center; gap:14px; }
+        .topbar-plan {
+            background:var(--color-morado-light); color:var(--color-morado);
+            padding:6px 14px; border-radius:50px; font-size:.78rem; font-weight:700;
+        }
+        .topbar-date { font-size:.8rem; color:var(--texto-light); }
+        .notif-btn {
+            width:36px; height:36px; background:var(--bg); border-radius:50%;
+            border:none; cursor:pointer; display:flex; align-items:center;
+            justify-content:center; font-size:1rem; transition:.2s; position:relative;
+        }
+        .notif-btn:hover { background:#e8e8f0; }
+        .notif-dot { position:absolute; top:6px; right:6px; width:8px; height:8px; background:var(--color-rojo); border-radius:50%; border:2px solid white; }
+
+        /* Scrollable content area */
+        .content-area { flex:1; overflow-y:auto; padding:28px 32px; }
+
+        /* ===== VIEWS ===== */
+        .view-section { display:none; animation:fadeIn .3s ease; }
+        .view-section.active { display:block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+        .view-header { margin-bottom:24px; }
+        .view-header h2 { font-size:1.35rem; font-weight:800; color:var(--texto); }
+        .view-header p { color:var(--texto-light); font-size:.88rem; margin-top:4px; }
+
+        /* ===== STAT CARDS ===== */
+        .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:18px; margin-bottom:28px; }
+        .stat-card {
+            background:var(--card-bg); padding:22px 20px;
+            border-radius:var(--radius); box-shadow:var(--shadow-sm);
+            border:1px solid var(--borde); transition:.3s;
+            display:flex; align-items:center; gap:16px;
+        }
+        .stat-card:hover { box-shadow:var(--shadow-md); transform:translateY(-2px); }
+        .stat-icon {
+            width:48px; height:48px; border-radius:12px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.4rem; flex-shrink:0;
+        }
+        .stat-info h3 { font-size:.72rem; color:var(--texto-light); font-weight:600; text-transform:uppercase; letter-spacing:.5px; }
+        .stat-info p { font-size:1.9rem; font-weight:800; color:var(--texto); line-height:1.2; }
+        .stat-info span { font-size:.75rem; color:var(--color-verde); font-weight:600; }
+
+        /* ===== UPLOAD SECTION ===== */
+        .card { background:var(--card-bg); border-radius:var(--radius); box-shadow:var(--shadow-sm); border:1px solid var(--borde); }
+        .card-header { padding:20px 24px 0; }
+        .card-header h3 { font-size:1rem; font-weight:700; color:var(--texto); }
+        .card-header p { font-size:.83rem; color:var(--texto-light); margin-top:3px; }
+        .card-body { padding:20px 24px 24px; }
+
+        .upload-box {
+            border:2px dashed #d0c4e8; padding:36px 20px; border-radius:var(--radius);
+            text-align:center; cursor:pointer; transition:.3s;
+            background:linear-gradient(135deg, #faf8ff, #f5f0ff);
+        }
+        .upload-box:hover { border-color:var(--color-morado); background:#f3e5f5; }
+        .upload-box .upload-icon { font-size:2.5rem; margin-bottom:12px; }
+        .upload-box .upload-title { font-weight:700; font-size:.97rem; color:var(--texto); margin-bottom:5px; }
+        .upload-box .upload-sub { font-size:.82rem; color:var(--texto-light); }
+        .upload-browse { color:var(--color-morado); font-weight:700; cursor:pointer; text-decoration:underline; }
+
+        .upload-options { margin-top:18px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+        .check-option { display:flex; align-items:center; gap:8px; font-size:.88rem; color:#555; cursor:pointer; }
+        .check-option input[type=checkbox] { accent-color:var(--color-morado); width:16px; height:16px; cursor:pointer; }
+
+        .progress-wrap { margin-top:16px; display:none; }
+        .progress-label { display:flex; justify-content:space-between; font-size:.8rem; margin-bottom:6px; color:#666; }
+        .progress-bar-bg { width:100%; height:8px; background:#eee; border-radius:50px; overflow:hidden; }
+        .progress-bar { height:100%; width:0%; background:linear-gradient(90deg, var(--color-verde), #66bb6a); border-radius:50px; transition:width .1s; }
+        .progress-status { font-size:.8rem; color:var(--color-verde); font-weight:600; margin-top:6px; }
+
+        /* ===== ACTIVITY FEED ===== */
+        .activity-list { display:flex; flex-direction:column; gap:0; }
+        .activity-item {
+            display:flex; align-items:center; gap:14px;
+            padding:14px 0; border-bottom:1px solid var(--borde);
+        }
+        .activity-item:last-child { border-bottom:none; }
+        .act-icon { width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+        .act-info { flex:1; }
+        .act-info h4 { font-size:.87rem; font-weight:600; margin-bottom:2px; }
+        .act-info p { font-size:.78rem; color:var(--texto-light); }
+        .act-time { font-size:.75rem; color:var(--texto-light); white-space:nowrap; }
+
+        /* ===== TABLE ===== */
+        .table-wrap { overflow-x:auto; }
+        table { width:100%; border-collapse:collapse; }
+        th { padding:13px 16px; text-align:left; font-size:.75rem; font-weight:700; color:var(--texto-light); text-transform:uppercase; letter-spacing:.7px; background:#f8f8fc; border-bottom:2px solid var(--borde); }
+        td { padding:14px 16px; font-size:.87rem; border-bottom:1px solid #f0f0f7; color:var(--texto); }
+        tr:last-child td { border-bottom:none; }
+        tr:hover td { background:#fafafe; }
+
+        .status { padding:4px 12px; border-radius:50px; font-size:.75rem; font-weight:700; display:inline-block; }
+        .status.blockchain { background:var(--color-verde-light); color:var(--color-verde); }
+        .status.pendiente { background:#fff3e0; color:#e65100; }
+        .status.no-req { background:#f5f5f5; color:#888; }
+        .status.rechazado { background:#ffebee; color:var(--color-rojo); }
+        .status.pagado { background:#e3f2fd; color:#1565c0; }
+
+        .hash-code { font-family:'Courier New',monospace; font-size:.8rem; color:#888; background:#f5f5f5; padding:3px 8px; border-radius:5px; }
+        .link-action { color:var(--color-morado); font-weight:600; font-size:.84rem; text-decoration:none; transition:.2s; }
+        .link-action:hover { color:var(--color-morado-dark); text-decoration:underline; }
+        .link-verde { color:var(--color-verde); font-weight:600; font-size:.84rem; text-decoration:none; transition:.2s; }
+        .link-verde:hover { text-decoration:underline; }
+
+        /* ===== BILLING CARD ===== */
+        .billing-summary {
+            background:linear-gradient(135deg, var(--color-morado), var(--color-morado-dark));
+            color:white; border-radius:var(--radius); padding:28px; margin-bottom:20px;
+            display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+        }
+        .billing-info h3 { font-size:1rem; font-weight:700; opacity:.85; margin-bottom:4px; }
+        .billing-info p { font-size:1.6rem; font-weight:800; }
+        .billing-info span { font-size:.85rem; opacity:.7; }
+        .billing-actions { display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
+        .plan-badge { background:rgba(255,255,255,.2); padding:6px 14px; border-radius:50px; font-size:.8rem; font-weight:700; }
+        .billing-renew { font-size:.78rem; opacity:.7; }
+
+        @media(max-width:900px){
+            .sidebar { display:none; }
+            .topbar { padding:0 16px; }
+            .content-area { padding:16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== SIDEBAR ===== -->
+    <nav class="sidebar">
+        <a href="index.html" class="sidebar-logo">
+            <img src="logo.jpg" alt="Logo Jurintegra">
+            <span>JURINTEGRA</span>
+        </a>
+
+        <div class="sidebar-user">
+            <div class="user-avatar">E</div>
+            <div class="user-info">
+                <div class="user-name">Empresa S.A.C.</div>
+                <div class="user-plan">Plan Normal</div>
+            </div>
+            <div class="online-dot"></div>
+        </div>
+
+        <div class="sidebar-nav">
+            <span class="nav-section-label">Principal</span>
+            <button class="nav-btn active" onclick="cambiarVista('vista-resumen', this)">
+                <span class="nav-icon">📊</span> Resumen
+            </button>
+            <button class="nav-btn" onclick="cambiarVista('vista-documentos', this)">
+                <span class="nav-icon">📁</span> Mis Documentos
+            </button>
+            <span class="nav-section-label">Servicios</span>
+            <button class="nav-btn" onclick="cambiarVista('vista-validaciones', this)">
+                <span class="nav-icon">🧠</span> Validaciones Psicológicas
+            </button>
+            <span class="nav-section-label">Cuenta</span>
+            <button class="nav-btn" onclick="cambiarVista('vista-facturacion', this)">
+                <span class="nav-icon">💳</span> Facturación
+            </button>
+        </div>
+
+        <div class="sidebar-bottom">
+            <a href="index.html" class="logout-btn">
+                <span>🚪</span> Cerrar Sesión
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN ===== -->
+    <div class="main-content">
+        <!-- TOP BAR -->
+        <div class="topbar">
+            <div class="topbar-left">
+                <h1 id="topbar-title">Panel de Control</h1>
+                <p>Bienvenido, <strong>Empresa S.A.C.</strong> — Martes, 15 de Julio 2026</p>
+            </div>
+            <div class="topbar-right">
+                <div class="topbar-plan">⭐ Plan Normal</div>
+                <button class="notif-btn" title="Notificaciones">
+                    🔔<span class="notif-dot"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- CONTENT AREA -->
+        <div class="content-area">
+
+            <!-- ===== VISTA RESUMEN ===== -->
+            <div id="vista-resumen" class="view-section active">
+                <div class="view-header">
+                    <h2>Resumen de Cuenta</h2>
+                    <p>Un vistazo general a tu actividad en Jurintegra.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:#f3e5f5;">📄</div>
+                        <div class="stat-info">
+                            <h3>Documentos Protegidos</h3>
+                            <p id="countDocs">2</p>
+                            <span>↑ +1 este mes</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:#e8f5e9;">🧠</div>
+                        <div class="stat-info">
+                            <h3>Validaciones Realizadas</h3>
+                            <p>1</p>
+                            <span>✓ Certificados emitidos</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:#fff8e1;">⚡</div>
+                        <div class="stat-info">
+                            <h3>Créditos Disponibles</h3>
+                            <p>1</p>
+                            <span>de 1 mensuales</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background:#e3f2fd;">🔒</div>
+                        <div class="stat-info">
+                            <h3>Seguridad</h3>
+                            <p>100<span style="font-size:1rem;color:#1565c0;">%</span></p>
+                            <span style="color:#1565c0;">Encriptación activa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UPLOAD -->
+                <div class="card" style="margin-bottom:20px;">
+                    <div class="card-header">
+                        <h3>Registrar y Encriptar Nuevo Documento</h3>
+                        <p>El archivo se procesa y encripta localmente antes del sellado Blockchain.</p>
+                    </div>
+                    <div class="card-body">
+                        <input type="file" id="fileInput" style="display:none;" onchange="archivoSeleccionado(this)">
+                        <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+                            <div class="upload-icon">📂</div>
+                            <div class="upload-title">Arrastra y suelta tu archivo aquí</div>
+                            <div class="upload-sub">o <span class="upload-browse">haz clic para seleccionar</span> — PDF, Word, MAX 50MB</div>
+                        </div>
+                        <div class="upload-options">
+                            <label class="check-option">
+                                <input type="checkbox" id="reqPsicologia">
+                                🧠 Requerir Validación Psicológica del Consentimiento
+                            </label>
+                        </div>
+                        <div class="progress-wrap" id="progressWrap">
+                            <div class="progress-label">
+                                <span id="progressText">Procesando...</span>
+                                <span id="progressPct">0%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" id="progressBar"></div>
+                            </div>
+                            <div class="progress-status" id="progressStatus"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ACTIVITY -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Actividad Reciente</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="act-icon" style="background:#e8f5e9;">✅</div>
+                                <div class="act-info">
+                                    <h4>Acuerdo_Socios_V2.pdf sellado en Blockchain</h4>
+                                    <p>Hash SHA-256: a9f82d...e312bc — Red confirmada</p>
+                                </div>
+                                <div class="act-time">28 Jun 2026</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-icon" style="background:#f3e5f5;">🧠</div>
+                                <div class="act-info">
+                                    <h4>Validación psicológica completada — Juan Pérez</h4>
+                                    <p>Resultado: Plena Capacidad — Certificado adjunto</p>
+                                </div>
+                                <div class="act-time">29 Jun 2026</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-icon" style="background:#e3f2fd;">📄</div>
+                                <div class="act-info">
+                                    <h4>Contrato_Arrendamiento.pdf registrado</h4>
+                                    <p>Hash SHA-256: 4b8e11...9a2f5d</p>
+                                </div>
+                                <div class="act-time">1 Jul 2026</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-icon" style="background:#fff3e0;">⏰</div>
+                                <div class="act-info">
+                                    <h4>Cita psicológica programada — María González</h4>
+                                    <p>Poder_Notarial_Testamento.pdf — 5 Jul 2026, 10:00 AM</p>
+                                </div>
+                                <div class="act-time">2 Jul 2026</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== VISTA DOCUMENTOS ===== -->
+            <div id="vista-documentos" class="view-section">
+                <div class="view-header">
+                    <h2>Bóveda Digital Blockchain</h2>
+                    <p>Registro inmutable de todos tus documentos legales protegidos.</p>
+                </div>
+                <div class="card">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre del Documento</th>
+                                    <th>Fecha</th>
+                                    <th>Hash SHA-256</th>
+                                    <th>Estado</th>
+                                    <th>Certificado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaDocs">
+                                <tr>
+                                    <td>📄 Acuerdo_Socios_V2.pdf</td>
+                                    <td>28/06/2026</td>
+                                    <td><span class="hash-code">a9f82d...e312bc</span></td>
+                                    <td><span class="status blockchain">⛓️ En Blockchain</span></td>
+                                    <td><a href="#" class="link-verde">Descargar</a></td>
+                                </tr>
+                                <tr>
+                                    <td>📄 Contrato_Arrendamiento.pdf</td>
+                                    <td>01/07/2026</td>
+                                    <td><span class="hash-code">4b8e11...9a2f5d</span></td>
+                                    <td><span class="status blockchain">⛓️ En Blockchain</span></td>
+                                    <td><a href="#" class="link-verde">Descargar</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== VISTA VALIDACIONES ===== -->
+            <div id="vista-validaciones" class="view-section">
+                <div class="view-header">
+                    <h2>Gestión de Consentimiento Informado</h2>
+                    <p>Administra las citas y resultados de evaluaciones psicológicas de tus firmantes.</p>
+                </div>
+                <div class="card">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Documento Asociado</th>
+                                    <th>Firmante a Evaluar</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>📄 Acuerdo_Socios_V2.pdf</td>
+                                    <td>Juan Pérez</td>
+                                    <td><span class="status blockchain">✅ Aprobado — Plena Capacidad</span></td>
+                                    <td><span style="color:#aaa; font-size:.84rem;">Completado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>📄 Poder_Notarial_Testamento.pdf</td>
+                                    <td>María González</td>
+                                    <td><span class="status pendiente">⏰ Cita: 05/07/2026</span></td>
+                                    <td><a href="#" class="link-action">📹 Unirse a Videollamada</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== VISTA FACTURACIÓN ===== -->
+            <div id="vista-facturacion" class="view-section">
+                <div class="view-header">
+                    <h2>Facturación y Pagos</h2>
+                    <p>Administra tu suscripción y consulta el historial de pagos.</p>
+                </div>
+
+                <div class="billing-summary">
+                    <div class="billing-info">
+                        <h3>Próximo Pago</h3>
+                        <p>S/ 175.00 <span style="font-size:1rem;">/mes</span></p>
+                        <span>Tarjeta vinculada: **** **** **** 4589</span>
+                    </div>
+                    <div class="billing-actions">
+                        <div class="plan-badge">⭐ Plan Normal Activo</div>
+                        <div class="billing-renew">Renueva el 01/08/2026</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="padding-bottom:16px;">
+                        <h3>Historial de Pagos</h3>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>N° Factura</th>
+                                    <th>Fecha</th>
+                                    <th>Concepto</th>
+                                    <th>Monto</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>F001-000458</td>
+                                    <td>01/07/2026</td>
+                                    <td>Suscripción Mensual — Plan Normal</td>
+                                    <td><strong>S/ 175.00</strong></td>
+                                    <td><span class="status pagado">✓ Pagado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>F001-000302</td>
+                                    <td>01/06/2026</td>
+                                    <td>Suscripción Mensual — Plan Normal</td>
+                                    <td><strong>S/ 175.00</strong></td>
+                                    <td><span class="status pagado">✓ Pagado</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /content-area -->
+    </div><!-- /main-content -->
+
+    <script>
+        // =======================================================
+        // 1. INICIALIZACIÓN Y VALIDACIÓN DEL PLAN AL CARGAR
+        // =======================================================
+        document.addEventListener("DOMContentLoaded", () => {
+            // Leer quién inició sesión desde la memoria del navegador
+            const usuarioGuardado = localStorage.getItem("usuarioActual");
+
+            // Si alguien intenta entrar a dashboard.html sin haber pasado por el login:
+            if (!usuarioGuardado) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            // Convertimos los datos guardados a un objeto manipulable
+            const usuario = JSON.parse(usuarioGuardado);
+
+            // --- A. ACTUALIZAR INTERFAZ CON DATOS DEL USUARIO ---
+            document.querySelector('.user-name').textContent = usuario.nombre;
+            document.querySelector('.topbar-left strong').textContent = usuario.nombre;
+            document.querySelector('.user-avatar').textContent = usuario.nombre.charAt(0).toUpperCase();
+
+            // Transformar el plan a texto amigable
+            let nombrePlan = "";
+            if (usuario.plan === "basico") nombrePlan = "Plan Básico";
+            if (usuario.plan === "normal") nombrePlan = "Plan Normal";
+            if (usuario.plan === "premium") nombrePlan = "Plan Premium";
+
+            // Insertar el plan en los distintos lugares del dashboard
+            document.querySelector('.user-plan').textContent = nombrePlan;
+            document.querySelector('.topbar-plan').innerHTML = `⭐ ${nombrePlan}`;
+            document.querySelector('.plan-badge').innerHTML = `⭐ ${nombrePlan} Activo`;
+
+            // --- B. LIMITACIONES SEGÚN EL PLAN ---
+            // Capturamos los elementos que queremos ocultar/modificar
+            const botonValidacionesNav = document.querySelectorAll('.nav-btn')[2]; 
+            const tituloServiciosNav = document.querySelectorAll('.nav-section-label')[1];
+            const checkboxPsicologia = document.querySelector('.upload-options');
+            const tarjetaCreditos = document.querySelectorAll('.stat-card')[2]; 
+
+            if (usuario.plan === "basico") {
+                // El plan BÁSICO no tiene acceso a validaciones psicológicas
+                botonValidacionesNav.style.display = "none";
+                tituloServiciosNav.style.display = "none";
+                checkboxPsicologia.style.display = "none";
+                tarjetaCreditos.style.display = "none";
+                
+            } else if (usuario.plan === "premium") {
+                // El plan PREMIUM tiene créditos ilimitados
+                tarjetaCreditos.querySelector('p').textContent = "∞";
+                tarjetaCreditos.querySelector('span').textContent = "Ilimitados";
+            }
+        });
+
+        // =======================================================
+        // 2. LÓGICA DE CERRAR SESIÓN
+        // =======================================================
+        document.querySelector('.logout-btn').addEventListener('click', (e) => {
+            e.preventDefault(); 
+            localStorage.removeItem("usuarioActual"); // Destruimos la sesión
+            window.location.href = "login.html"; 
+        });
+
+        // =======================================================
+        // 3. FUNCIONES DE INTERFAZ QUE YA TENÍAS
+        // =======================================================
+        function cambiarVista(idVista, btn) {
+            document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(idVista).classList.add('active');
+            btn.classList.add('active');
+            const titles = {
+                'vista-resumen': 'Panel de Control',
+                'vista-documentos': 'Bóveda Digital',
+                'vista-validaciones': 'Validaciones',
+                'vista-facturacion': 'Facturación'
+            };
+            document.getElementById('topbar-title').textContent = titles[idVista] || 'Panel de Control';
+        }
+
+        function archivoSeleccionado(input) {
+            if (!input.files.length) return;
+            const file = input.files[0];
+            const pWrap = document.getElementById('progressWrap');
+            const pBar = document.getElementById('progressBar');
+            const pTxt = document.getElementById('progressText');
+            const pPct = document.getElementById('progressPct');
+            const pStatus = document.getElementById('progressStatus');
+
+            pWrap.style.display = 'block';
+            pStatus.textContent = '';
+            let pct = 0;
+
+            const interval = setInterval(() => {
+                pct += 4;
+                pBar.style.width = pct + '%';
+                pPct.textContent = pct + '%';
+                if (pct < 35) pTxt.textContent = `🔐 Encriptando "${file.name}"...`;
+                else if (pct < 70) pTxt.textContent = `🔗 Calculando Hash SHA-256...`;
+                else if (pct < 100) pTxt.textContent = `⛓️ Registrando en nodos Blockchain...`;
+                else {
+                    clearInterval(interval);
+                    pTxt.textContent = `✅ Documento asegurado con éxito`;
+                    pPct.textContent = '100%';
+                    pStatus.textContent = '¡Hash registrado en la red Blockchain de forma permanente!';
+                    agregarFilaTabla(file.name);
+                    setTimeout(() => {
+                        pWrap.style.display = 'none';
+                        pBar.style.width = '0%';
+                        input.value = '';
+                    }, 3500);
+                }
+            }, 120);
+        }
+
+        function agregarFilaTabla(nombre) {
+            const chars = 'abcdef0123456789';
+            let hash = Array.from({length:6}, () => chars[Math.floor(Math.random()*chars.length)]).join('');
+            hash += '...' + Array.from({length:6}, () => chars[Math.floor(Math.random()*chars.length)]).join('');
+            const d = new Date();
+            const fecha = `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/2026`;
+            const row = `<tr>
+                <td>📄 ${nombre}</td><td>${fecha}</td>
+                <td><span class="hash-code">${hash}</span></td>
+                <td><span class="status blockchain">⛓️ En Blockchain</span></td>
+                <td><a href="#" class="link-verde">Descargar</a></td>
+            </tr>`;
+            document.getElementById('tablaDocs').insertAdjacentHTML('afterbegin', row);
+            document.getElementById('countDocs').textContent = parseInt(document.getElementById('countDocs').textContent) + 1;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurintegra S.A.C. | Seguridad Jurídica Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-morado: #6A1B9A;
+            --color-morado-dark: #4a148c;
+            --color-verde: #2E7D32;
+            --color-verde-dark: #1b5e20;
+            --color-rojo: #C62828;
+            --color-amarillo: #F9A825;
+            --color-fondo: #F5F7FA;
+            --color-texto: #2d2d2d;
+            --color-blanco: #FFFFFF;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,0.14);
+            --radius: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--color-fondo); color: var(--color-texto); line-height: 1.65; font-family: 'Inter', 'Segoe UI', sans-serif; }
+
+        /* ===== HEADER ===== */
+        header {
+            background-color: var(--color-blanco);
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--color-morado);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+        }
+        .logo img { height: 38px; border-radius: 6px; object-fit: cover; }
+        .nav-links { list-style: none; display: flex; gap: 8px; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-texto);
+            font-weight: 500;
+            font-size: 0.92rem;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover { background: #f3e5f5; color: var(--color-morado); }
+        .btn-login {
+            background-color: var(--color-morado) !important;
+            color: white !important;
+            padding: 8px 20px !important;
+            border-radius: 8px !important;
+            font-weight: 700 !important;
+        }
+        .btn-login:hover { background-color: var(--color-morado-dark) !important; }
+
+        .menu-toggle { display: none; flex-direction: column; justify-content: space-around; width: 28px; height: 24px; background: transparent; border: none; cursor: pointer; }
+        .menu-toggle span { width: 100%; height: 2.5px; background-color: var(--color-morado); border-radius: 10px; transition: 0.3s; }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding-top: 70px;
+            height: 100vh;
+            min-height: 600px;
+            max-height: 800px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background:
+                linear-gradient(135deg, rgba(74,20,140,0.88) 0%, rgba(106,27,154,0.82) 50%, rgba(46,125,50,0.75) 100%),
+                url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
+            color: white;
+            animation: fadeIn 1s ease-in;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 80px;
+            background: linear-gradient(to top, var(--color-fondo), transparent);
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 0 5%; }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero p { font-size: 1.15rem; max-width: 680px; margin: 0 auto 36px; opacity: 0.92; font-weight: 300; }
+        .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            background-color: var(--color-verde);
+            color: var(--color-blanco);
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn:hover { background-color: var(--color-verde-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(46,125,50,0.4); }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.7);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: white; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ===== STATS BAR ===== */
+        .stats-bar {
+            background: var(--color-blanco);
+            box-shadow: var(--shadow-md);
+            padding: 32px 5%;
+        }
+        .stats-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        .stat-item { padding: 10px; }
+        .stat-num { font-size: 2.2rem; font-weight: 800; color: var(--color-morado); }
+        .stat-label { font-size: 0.85rem; color: #777; margin-top: 4px; }
+        .stat-divider { width: 1px; background: #eee; }
+
+        /* ===== SECTIONS ===== */
+        .section { padding: 90px 5%; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        h2.section-title {
+            text-align: center;
+            color: var(--color-morado);
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .section-subtitle { text-align: center; color: #777; max-width: 600px; margin: 0 auto 52px; font-size: 1.05rem; }
+
+        /* ===== NOSOTROS ===== */
+        .nosotros-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .nosotros-img-wrap { position: relative; }
+        .nosotros-img-wrap img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+        }
+        .nosotros-img-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--color-verde);
+            color: white;
+            padding: 20px 28px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+        .nosotros-img-badge .big-num { font-size: 2.5rem; font-weight: 800; line-height: 1; }
+        .nosotros-img-badge .small-text { font-size: 0.8rem; opacity: 0.9; }
+        .nosotros-cards { display: flex; flex-direction: column; gap: 24px; }
+        .card-nosotros {
+            background: var(--color-blanco);
+            padding: 28px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--color-verde);
+            transition: box-shadow 0.3s;
+        }
+        .card-nosotros:hover { box-shadow: var(--shadow-md); }
+        .card-nosotros h3 { color: var(--color-morado); margin-bottom: 10px; font-size: 1.15rem; font-weight: 700; }
+
+        /* ===== SERVICIOS ===== */
+        .section-bg { background: var(--color-blanco); }
+        .servicios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; }
+        .card-servicio {
+            background: var(--color-fondo);
+            padding: 36px 28px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #eaeaea;
+        }
+        .card-servicio:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); background: white; }
+        .card-servicio .svc-icon {
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+        }
+        .card-servicio h3 { color: var(--color-morado); margin-bottom: 12px; font-size: 1.15rem; font-weight: 700; }
+        .card-servicio p { color: #666; font-size: 0.95rem; }
+
+        /* ===== PLANES ===== */
+        .planes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 28px; align-items: start; }
+        .card-plan {
+            background: var(--color-blanco);
+            padding: 40px 32px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #eaeaea;
+            transition: all 0.3s;
+        }
+        .card-plan:hover { box-shadow: var(--shadow-md); }
+        .card-plan.destacado {
+            border: 2px solid var(--color-morado);
+            background: linear-gradient(135deg, #f3e5f5 0%, #fff 50%);
+            transform: scale(1.04);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .badge-popular {
+            background: var(--color-morado);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+        .card-plan h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+        .precio { font-size: 2.8rem; color: var(--color-verde); font-weight: 800; margin: 16px 0 8px; line-height: 1; }
+        .precio span { font-size: 1rem; color: #aaa; text-decoration: line-through; font-weight: 400; }
+        .precio-periodo { font-size: 0.85rem; color: #999; margin-bottom: 20px; }
+        .card-plan ul { list-style: none; margin-bottom: 28px; text-align: left; }
+        .card-plan ul li { margin-bottom: 10px; padding-left: 24px; position: relative; font-size: 0.95rem; color: #555; }
+        .card-plan ul li::before { content: '✓'; color: var(--color-verde); position: absolute; left: 0; font-weight: 800; }
+
+        /* ===== TESTIMONIAL ===== */
+        .testimonial-section {
+            background: linear-gradient(135deg, var(--color-morado), var(--color-morado-dark));
+            padding: 80px 5%;
+            text-align: center;
+            color: white;
+        }
+        .testimonial-section h2 { font-size: 2rem; font-weight: 700; margin-bottom: 40px; }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 28px;
+            border-radius: var(--radius);
+            text-align: left;
+        }
+        .testimonial-card p { font-size: 0.95rem; opacity: 0.92; margin-bottom: 16px; font-style: italic; }
+        .testimonial-author { font-weight: 700; font-size: 0.9rem; }
+        .testimonial-role { font-size: 0.8rem; opacity: 0.7; }
+        .stars { color: var(--color-amarillo); font-size: 1rem; margin-bottom: 10px; letter-spacing: 2px; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #1a1a2e;
+            color: rgba(255,255,255,0.75);
+            padding: 40px 5% 24px;
+        }
+        .footer-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 16px;
+        }
+        .footer-brand { font-size: 1.2rem; font-weight: 800; color: white; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+        .footer-links a:hover { color: white; }
+        .footer-copy { text-align: center; margin-top: 24px; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; max-width: 1200px; margin: 24px auto 0; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .nosotros-layout { grid-template-columns: 1fr; }
+            .nosotros-img-wrap { display: none; }
+        }
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            .nav-links { position: absolute; top: 70px; left: 0; right: 0; background: white; flex-direction: column; gap: 0; height: 0; overflow: hidden; transition: height 0.3s; box-shadow: var(--shadow-md); }
+            .nav-links.active { height: 340px; }
+            .nav-links li { width: 100%; text-align: center; border-bottom: 1px solid #f0f0f0; }
+            .nav-links a { display: block; padding: 14px 0; }
+            .hero { max-height: none; }
+            .card-plan.destacado { transform: scale(1); }
+            .stat-divider { display: none; }
+            .footer-inner { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="Logo Jurintegra">
+                JURINTEGRA
+            </a>
+            <button class="menu-toggle" id="mobile-menu-btn" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="servicios.html">Cómo Funciona</a></li>
+                <li><a href="index.html#planes">Planes</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="login.html" class="btn-login">Ingresar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🔐 Plataforma LegalTech N°1 en Perú</div>
+            <h1>Seguridad Jurídica en el Entorno Digital</h1>
+            <p>Protegemos, validamos y gestionamos tus documentos legales mediante tecnología Blockchain y evaluación psicológica del consentimiento.</p>
+            <div class="hero-btns">
+                <a href="#planes" class="btn">Ver Planes y Precios</a>
+                <a href="servicios.html" class="btn-outline">¿Cómo funciona?</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stats-inner">
+            <div class="stat-item">
+                <div class="stat-num">500+</div>
+                <div class="stat-label">Documentos protegidos</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-num">100%</div>
+                <div class="stat-label">Encriptación extremo a extremo</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-num">24/7</div>
+                <div class="stat-label">Soporte disponible</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-num">3</div>
+                <div class="stat-label">Pasos para asegurar tu contrato</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOSOTROS -->
+    <section id="nosotros" class="section">
+        <div class="section-inner">
+            <h2 class="section-title">¿Quiénes Somos?</h2>
+            <p class="section-subtitle">Una empresa comprometida con la innovación jurídica y la seguridad digital en Perú.</p>
+            <div class="nosotros-layout">
+                <div class="nosotros-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=700&q=80&auto=format&fit=crop" alt="Equipo profesional de Jurintegra">
+                    <div class="nosotros-img-badge">
+                        <div class="big-num">2026</div>
+                        <div class="small-text">Fundada en Lima, Perú</div>
+                    </div>
+                </div>
+                <div class="nosotros-cards">
+                    <div class="card-nosotros">
+                        <h3>🎯 Nuestra Misión</h3>
+                        <p>Brindar soluciones tecnológicas seguras para la protección, validación y gestión de documentos legales digitales, utilizando blockchain y sistemas de verificación reforzada del consentimiento.</p>
+                    </div>
+                    <div class="card-nosotros">
+                        <h3>👁️ Nuestra Visión</h3>
+                        <p>Convertirnos en el estándar nacional en protección de documentos legales digitales, siendo reconocidos por integrar tecnología blockchain y mecanismos especializados de validación.</p>
+                    </div>
+                    <div class="card-nosotros">
+                        <h3>⚖️ Nuestros Valores</h3>
+                        <p>Operamos bajo principios de <strong>Confidencialidad</strong>, <strong>Innovación</strong>, <strong>Ética</strong> profesional y un fuerte compromiso con la <strong>Evolución Legal</strong> digital.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="section section-bg">
+        <div class="section-inner">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="section-subtitle">Tecnología de vanguardia al servicio de tu seguridad jurídica.</p>
+            <div class="servicios-grid">
+                <div class="card-servicio">
+                    <div class="svc-icon" style="background:#f3e5f5;">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <rect x="6" y="4" width="24" height="28" rx="3" fill="#6A1B9A" opacity="0.15"/>
+                          <path d="M18 8 L26 14 L26 28 L10 28 L10 8 Z" stroke="#6A1B9A" stroke-width="2" fill="none"/>
+                          <circle cx="18" cy="16" r="5" stroke="#6A1B9A" stroke-width="2" fill="none"/>
+                          <path d="M14 24 Q18 20 22 24" stroke="#6A1B9A" stroke-width="2" fill="none"/>
+                          <path d="M24 8 l4 4 M24 8 l4-4" stroke="#2E7D32" stroke-width="1.5"/>
+                          <circle cx="28" cy="12" r="3" fill="#2E7D32" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <h3>Protección Blockchain</h3>
+                    <p>Cada documento es protegido mediante tecnología blockchain, registrado de forma permanente, segura e inalterable con sello de tiempo criptográfico.</p>
+                </div>
+                <div class="card-servicio">
+                    <div class="svc-icon" style="background:#e8f5e9;">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                          <path d="M18 4 L30 10 L30 20 C30 26 24 31 18 33 C12 31 6 26 6 20 L6 10 Z" fill="#2E7D32" opacity="0.15" stroke="#2E7D32" stroke-width="2"/>
+                          <path d="M12 18 L16 22 L24 14" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Firma Digital</h3>
+                    <p>Autenticamos la identidad de los involucrados en el documento con garantía criptográfica, respaldo jurídico y trazabilidad completa.</p>
+                </div>
+                <div class="card-servicio">
+                    <div class="svc-icon" style="background:#fff8e1;">
+                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                          <circle cx="18" cy="14" r="8" fill="#F9A825" opacity="0.2" stroke="#F9A825" stroke-width="2"/>
+                          <path d="M14 20 Q18 26 22 20" stroke="#C62828" stroke-width="2" fill="none" stroke-linecap="round"/>
+                          <circle cx="15" cy="13" r="1.5" fill="#6A1B9A"/>
+                          <circle cx="21" cy="13" r="1.5" fill="#6A1B9A"/>
+                          <path d="M10 30 Q18 26 26 30" stroke="#F9A825" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3>Validación Reforzada</h3>
+                    <p>Psicólogos colegiados evalúan que la persona comprende el contenido del acto jurídico y expresa su consentimiento de forma libre y voluntaria.</p>
+                </div>
+            </div>
+
+            <!-- Image strip -->
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:52px; border-radius:var(--radius); overflow:hidden;">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=75&auto=format&fit=crop" alt="Profesional legal" style="width:100%; height:180px; object-fit:cover;">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&q=75&auto=format&fit=crop" alt="Tecnología blockchain" style="width:100%; height:180px; object-fit:cover;">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=500&q=75&auto=format&fit=crop" alt="Contrato digital" style="width:100%; height:180px; object-fit:cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- PLANES -->
+    <section id="planes" class="section">
+        <div class="section-inner">
+            <h2 class="section-title">Planes de Servicio</h2>
+            <p class="section-subtitle">🎉 Promoción de lanzamiento: <strong style="color:var(--color-rojo)">50% de descuento durante el primer mes.</strong></p>
+            <div class="planes-grid">
+                <div class="card-plan">
+                    <h3>Plan Básico</h3>
+                    <div class="precio">S/ 75 <span>S/ 150</span></div>
+                    <div class="precio-periodo">por mes</div>
+                    <p style="margin-bottom:20px; color:#777; font-size:0.95rem;">Ideal para uso personal esporádico.</p>
+                    <ul>
+                        <li>Almacenamiento y registro seguro</li>
+                        <li>Validación de Firma Digital</li>
+                        <li>Protección Blockchain estándar</li>
+                        <li>Soporte técnico por correo</li>
+                    </ul>
+                    <a href="registro.html" class="btn" style="display:block; text-align:center;">Seleccionar Plan</a>
+                </div>
+
+                <div class="card-plan destacado">
+                    <div class="badge-popular">⭐ Más Popular</div>
+                    <h3>Plan Normal</h3>
+                    <div class="precio">S/ 175 <span>S/ 350</span></div>
+                    <div class="precio-periodo">por mes</div>
+                    <p style="margin-bottom:20px; color:#777; font-size:0.95rem;">Perfecto para profesionales y pequeñas empresas.</p>
+                    <ul>
+                        <li>Todos los beneficios del Plan Básico</li>
+                        <li>Mayor capacidad de almacenamiento</li>
+                        <li>1 Evaluación psicológica mensual</li>
+                        <li>Asistencia legal básica</li>
+                    </ul>
+                    <a href="registro.html" class="btn" style="display:block; text-align:center;">Seleccionar Plan</a>
+                </div>
+
+                <div class="card-plan">
+                    <h3>Plan Premium</h3>
+                    <div class="precio">S/ 375 <span>S/ 750</span></div>
+                    <div class="precio-periodo">por mes</div>
+                    <p style="margin-bottom:20px; color:#777; font-size:0.95rem;">Solución integral para notarías y corporaciones.</p>
+                    <ul>
+                        <li>Beneficios ilimitados de gestión</li>
+                        <li>Evaluaciones psicológicas prioritarias</li>
+                        <li>Auditoría de trazabilidad completa</li>
+                        <li>Soporte técnico y jurídico 24/7</li>
+                    </ul>
+                    <a href="registro.html" class="btn" style="display:block; text-align:center;">Seleccionar Plan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALES -->
+    <div class="testimonial-section">
+        <h2>Lo que dicen nuestros clientes</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"Jurintegra transformó completamente la forma en que manejamos nuestros contratos corporativos. La seguridad es inigualable."</p>
+                <div class="testimonial-author">Carlos Mendoza</div>
+                <div class="testimonial-role">Gerente General – Empresa de Inversiones</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"La validación psicológica del consentimiento nos dio la tranquilidad que necesitábamos para cerrar un acuerdo complejo con socios internacionales."</p>
+                <div class="testimonial-author">Ana Vargas</div>
+                <div class="testimonial-role">Abogada – Estudio Jurídico Vargas & Asociados</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">★★★★★</div>
+                <p>"Plataforma muy intuitiva. En minutos tuve mi contrato protegido con Blockchain. El soporte fue excelente durante todo el proceso."</p>
+                <div class="testimonial-author">Roberto Silva</div>
+                <div class="testimonial-role">Emprendedor – Lima, Perú</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">⚖️ JURINTEGRA S.A.C.</div>
+            <div class="footer-links">
+                <a href="nosotros.html">Nosotros</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contacto.html">Contacto</a>
+                <a href="legales.html">Términos y Privacidad</a>
+            </div>
+        </div>
+        <div class="footer-copy">
+            © 2026 JURINTEGRA S.A.C. Todos los derechos reservados. Lima, Perú | contacto@jurintegra.com.pe
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        mobileMenuBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => navMenu.classList.remove('active'));
+        });
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.getAttribute('href');
+                if (id === '#') return;
+                const el = document.querySelector(id);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>

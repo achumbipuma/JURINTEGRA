@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Políticas | Jurintegra S.A.C.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-morado: #6A1B9A;
+            --color-morado-dark: #4a148c;
+            --color-verde: #2E7D32;
+            --color-fondo: #F5F7FA;
+            --color-blanco: #FFFFFF;
+            --color-texto: #2d2d2d;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:var(--color-fondo); color:var(--color-texto); line-height:1.65; font-family:'Inter','Segoe UI',sans-serif; }
+
+        header { background:var(--color-blanco); box-shadow:var(--shadow-sm); position:sticky; top:0; z-index:1000; }
+        nav { display:flex; justify-content:space-between; align-items:center; padding:16px 5%; max-width:1200px; margin:0 auto; }
+        .logo { display:flex; align-items:center; font-size:22px; font-weight:800; color:var(--color-morado); text-decoration:none; gap:10px; }
+        .logo img { height:38px; border-radius:6px; }
+        .nav-links { list-style:none; display:flex; gap:8px; align-items:center; }
+        .nav-links a { text-decoration:none; color:var(--color-texto); font-weight:500; font-size:.92rem; padding:8px 12px; border-radius:6px; transition:.2s; }
+        .nav-links a:hover { background:#f3e5f5; color:var(--color-morado); }
+        .btn-login { background:var(--color-morado)!important; color:white!important; padding:8px 20px!important; border-radius:8px!important; font-weight:700!important; }
+        .menu-toggle { display:none; flex-direction:column; justify-content:space-around; width:28px; height:24px; background:transparent; border:none; cursor:pointer; }
+        .menu-toggle span { width:100%; height:2.5px; background:var(--color-morado); border-radius:10px; }
+
+        /* HERO */
+        .legal-hero {
+            position:relative; padding:80px 5% 60px;
+            background:
+                linear-gradient(160deg, rgba(29,29,45,0.92), rgba(74,20,140,0.85)),
+                url('https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=1200&q=80&auto=format&fit=crop') center/cover no-repeat;
+            color:white; text-align:center;
+        }
+        .legal-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:60px; background:linear-gradient(to top, var(--color-fondo), transparent); }
+        .legal-hero h1 { font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800; margin-bottom:12px; }
+        .legal-hero p { opacity:.88; font-size:1rem; max-width:500px; margin:0 auto; font-weight:300; }
+
+        /* TOC + CONTENT LAYOUT */
+        .legal-layout { display:grid; grid-template-columns:240px 1fr; gap:40px; max-width:1100px; margin:60px auto; padding:0 5%; }
+        .legal-toc {
+            background:var(--color-blanco); border-radius:var(--radius); padding:28px;
+            box-shadow:var(--shadow-sm); height:fit-content; position:sticky; top:90px;
+        }
+        .legal-toc h4 { color:var(--color-morado); font-weight:800; margin-bottom:16px; font-size:.95rem; text-transform:uppercase; letter-spacing:.5px; }
+        .legal-toc ol { padding-left:16px; }
+        .legal-toc li { margin-bottom:10px; }
+        .legal-toc a { text-decoration:none; color:#666; font-size:.88rem; transition:.2s; }
+        .legal-toc a:hover { color:var(--color-morado); }
+
+        .legal-container {
+            background:var(--color-blanco); padding:50px;
+            border-radius:var(--radius); box-shadow:var(--shadow-sm);
+        }
+        .update-date { font-style:italic; color:#888; font-size:.88rem; display:block; margin-bottom:32px; border-left:3px solid var(--color-verde); padding-left:12px; }
+        .legal-container h2 {
+            color:var(--color-morado); margin-top:36px; margin-bottom:14px;
+            font-size:1.2rem; font-weight:700; padding-bottom:10px;
+            border-bottom:1px solid #f0e6ff;
+        }
+        .legal-container h2:first-of-type { margin-top:0; }
+        .legal-container p { margin-bottom:14px; text-align:justify; color:#444; font-size:.95rem; }
+        .legal-container ul { margin-bottom:14px; padding-left:20px; }
+        .legal-container ul li { margin-bottom:10px; color:#444; font-size:.93rem; }
+        .legal-container ul li strong { color:var(--color-morado); }
+
+        .legal-badge {
+            display:inline-flex; align-items:center; gap:8px;
+            background:#f3e5f5; color:var(--color-morado); padding:10px 18px;
+            border-radius:8px; font-size:.85rem; font-weight:600; margin-bottom:24px;
+        }
+
+        footer { background:#1a1a2e; color:rgba(255,255,255,.75); padding:40px 5% 24px; }
+        .footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-size:1.2rem; font-weight:800; color:white; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { color:rgba(255,255,255,.65); text-decoration:none; font-size:.9rem; transition:.2s; }
+        .footer-links a:hover { color:white; }
+        .footer-copy { text-align:center; font-size:.85rem; border-top:1px solid rgba(255,255,255,.1); padding-top:20px; max-width:1200px; margin:24px auto 0; }
+
+        @media(max-width:900px){
+            .legal-layout{grid-template-columns:1fr;}
+            .legal-toc{position:static;}
+        }
+        @media(max-width:768px){
+            .menu-toggle{display:flex;}
+            .nav-links{position:absolute;top:70px;left:0;right:0;background:white;flex-direction:column;gap:0;height:0;overflow:hidden;transition:height .3s;box-shadow:var(--shadow-md);}
+            .nav-links.active{height:300px;}
+            .nav-links li{width:100%;text-align:center;border-bottom:1px solid #f0f0f0;}
+            .nav-links a{display:block;padding:14px 0;}
+            .legal-container{padding:28px 20px;}
+            .footer-inner{flex-direction:column;text-align:center;}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.jpg" alt="Logo Jurintegra"> JURINTEGRA S.A.C.</a>
+            <button class="menu-toggle" id="mobile-menu-btn"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Cómo Funciona</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="login.html" class="btn-login">Ingresar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="legal-hero">
+        <h1>Términos, Condiciones y Políticas de Privacidad</h1>
+        <p>Documento legal que regula el uso de los servicios de JURINTEGRA S.A.C. en cumplimiento con la ley peruana.</p>
+    </div>
+
+    <div class="legal-layout">
+        <!-- TOC -->
+        <aside class="legal-toc">
+            <h4>📄 Contenido</h4>
+            <ol>
+                <li><a href="#sec1">Aceptación de los Términos</a></li>
+                <li><a href="#sec2">Descripción del Servicio</a></li>
+                <li><a href="#sec3">Política de Privacidad</a></li>
+                <li><a href="#sec4">Responsabilidades del Usuario</a></li>
+                <li><a href="#sec5">Propiedad Intelectual</a></li>
+                <li><a href="#sec6">Jurisdicción</a></li>
+            </ol>
+        </aside>
+
+        <!-- CONTENT -->
+        <div class="legal-container">
+            <div class="legal-badge">⚖️ Legislación peruana | Ley N° 29733</div>
+            <span class="update-date">Última actualización: Julio de 2026</span>
+
+            <h2 id="sec1">1. Aceptación de los Términos</h2>
+            <p>Al acceder y utilizar la plataforma web y los servicios de <strong>JURINTEGRA S.A.C.</strong>, usted acepta estar legalmente vinculado por estos Términos y Condiciones. Si no está de acuerdo con alguno de los términos aquí expuestos, le rogamos que no utilice nuestros servicios.</p>
+
+            <h2 id="sec2">2. Descripción del Servicio</h2>
+            <p>JURINTEGRA S.A.C. ofrece servicios de resguardo y validación de documentos digitales mediante el uso de tecnología Blockchain, firmas digitales y evaluaciones psicológicas de consentimiento. Aclaramos que:</p>
+            <ul>
+                <li><strong>Inmutabilidad Blockchain:</strong> Una vez que un documento es encriptado y registrado en la red Blockchain a través de nuestra plataforma, el código Hash generado es inalterable. JURINTEGRA S.A.C. no puede modificar ni eliminar registros confirmados en la red.</li>
+                <li><strong>Validación Psicológica:</strong> El certificado de evaluación psicológica emitido por nuestros profesionales asociados refleja el estado cognitivo y la voluntad del usuario en el momento exacto de la evaluación. No constituye un dictamen médico permanente.</li>
+            </ul>
+
+            <h2 id="sec3">3. Política de Privacidad y Protección de Datos</h2>
+            <p>En cumplimiento con la <strong>Ley de Protección de Datos Personales (Ley N° 29733)</strong> y su Reglamento en la República del Perú, JURINTEGRA S.A.C. se compromete a salvaguardar la privacidad de sus usuarios:</p>
+            <ul>
+                <li><strong>Recopilación:</strong> Solo recopilamos los datos estrictamente necesarios para la creación de cuentas, facturación y la validación de identidad requerida para las firmas digitales.</li>
+                <li><strong>Confidencialidad de Documentos:</strong> Los documentos originales cargados en nuestra plataforma son encriptados de extremo a extremo. JURINTEGRA S.A.C. no tiene acceso al contenido de sus contratos; únicamente gestionamos la huella criptográfica (Hash) en la red Blockchain.</li>
+                <li><strong>Evaluaciones de Salud Mental:</strong> Los resultados y grabaciones de las evaluaciones psicológicas son estrictamente confidenciales y se manejan bajo el secreto profesional correspondiente, compartiéndose únicamente el "Certificado de Consentimiento" con las partes autorizadas.</li>
+            </ul>
+
+            <h2 id="sec4">4. Responsabilidades del Usuario</h2>
+            <p>El usuario es el único responsable de la legalidad, veracidad y exactitud de los documentos que carga en la plataforma. JURINTEGRA S.A.C. actúa como un intermediario tecnológico y no ofrece asesoría legal ni se responsabiliza por vicios ocultos en los contratos firmados por los usuarios, más allá de la validación del consentimiento en los planes que lo incluyan.</p>
+
+            <h2 id="sec5">5. Propiedad Intelectual</h2>
+            <p>Todo el software, diseño, código, logotipos e interfaz de la plataforma son propiedad exclusiva de JURINTEGRA S.A.C. Queda estrictamente prohibida su reproducción, distribución o modificación sin autorización expresa y por escrito.</p>
+
+            <h2 id="sec6">6. Jurisdicción y Ley Aplicable</h2>
+            <p>Estos Términos y Condiciones se rigen por las leyes de la República del Perú. Cualquier disputa que surja en relación con estos términos o el uso de la plataforma será sometida a la jurisdicción de los jueces y tribunales del Distrito Judicial de Lima.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">⚖️ JURINTEGRA S.A.C.</div>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="contacto.html">Contacto</a>
+            </div>
+        </div>
+        <div class="footer-copy">© 2026 JURINTEGRA S.A.C. Todos los derechos reservados. Lima, Perú</div>
+    </footer>
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

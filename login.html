@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | Jurintegra S.A.C.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-morado: #6A1B9A;
+            --color-morado-dark: #4a148c;
+            --color-verde: #2E7D32;
+            --color-verde-dark: #1b5e20;
+            --color-fondo: #F5F7FA;
+            --color-texto: #2d2d2d;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            display:flex; min-height:100vh;
+            background:var(--color-fondo);
+            color:var(--color-texto);
+            font-family:'Inter','Segoe UI',sans-serif;
+        }
+
+        /* ===== LEFT BRAND PANEL ===== */
+        .login-brand {
+            flex:1;
+            position:relative;
+            display:flex;
+            flex-direction:column;
+            justify-content:flex-end;
+            padding:50px;
+            overflow:hidden;
+            background:
+                linear-gradient(160deg, rgba(74,20,140,0.92) 0%, rgba(46,125,50,0.80) 100%),
+                url('https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=900&q=80&auto=format&fit=crop') center/cover no-repeat;
+        }
+        .brand-top {
+            position:absolute; top:44px; left:50px;
+            display:flex; align-items:center; gap:12px;
+        }
+        .brand-top img { height:42px; border-radius:8px; }
+        .brand-top span { font-size:1.4rem; font-weight:800; color:white; letter-spacing:-0.5px; }
+
+        /* Floating feature cards */
+        .feature-cards { display:flex; flex-direction:column; gap:14px; margin-bottom:40px; }
+        .feature-card {
+            background:rgba(255,255,255,0.1);
+            backdrop-filter:blur(14px);
+            border:1px solid rgba(255,255,255,0.2);
+            border-radius:12px;
+            padding:18px 20px;
+            display:flex; align-items:center; gap:14px;
+            color:white;
+            transition:.3s;
+        }
+        .feature-card:hover { background:rgba(255,255,255,0.16); transform:translateX(4px); }
+        .feature-card .fc-icon {
+            width:42px; height:42px; border-radius:10px;
+            background:rgba(255,255,255,0.15);
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.3rem; flex-shrink:0;
+        }
+        .feature-card h4 { font-size:.9rem; font-weight:700; margin-bottom:2px; }
+        .feature-card p { font-size:.78rem; opacity:.8; }
+
+        .brand-footer { color:rgba(255,255,255,.55); font-size:.78rem; }
+
+        /* ===== RIGHT FORM PANEL ===== */
+        .login-form-container {
+            width:480px; min-width:380px;
+            display:flex; flex-direction:column;
+            justify-content:center; align-items:center;
+            background:white;
+            padding:48px 52px;
+            box-shadow:-20px 0 60px rgba(0,0,0,0.08);
+        }
+        .form-wrapper { width:100%; }
+
+        .form-logo { display:flex; align-items:center; gap:10px; margin-bottom:36px; }
+        .form-logo img { height:40px; border-radius:6px; }
+        .form-logo span { font-size:1.3rem; font-weight:800; color:var(--color-morado); }
+
+        .form-badge {
+            display:inline-flex; align-items:center; gap:6px;
+            background:#f3e5f5; color:var(--color-morado);
+            padding:5px 14px; border-radius:50px; font-size:.75rem;
+            font-weight:700; margin-bottom:20px; letter-spacing:.5px;
+        }
+        .form-wrapper h2 { font-size:1.9rem; font-weight:800; margin-bottom:6px; letter-spacing:-.5px; }
+        .form-wrapper > p { color:#888; font-size:.92rem; margin-bottom:32px; }
+
+        /* Divider */
+        .divider { display:flex; align-items:center; gap:12px; margin:24px 0; }
+        .divider hr { flex:1; border:none; border-top:1px solid #eee; }
+        .divider span { color:#bbb; font-size:.8rem; font-weight:500; }
+
+        /* Input groups */
+        .input-group { margin-bottom:18px; }
+        .input-group label { display:block; margin-bottom:7px; font-weight:600; font-size:.82rem; color:#555; text-transform:uppercase; letter-spacing:.5px; }
+        .input-field {
+            position:relative; display:flex; align-items:center;
+        }
+        .input-field .field-icon {
+            position:absolute; left:14px; font-size:1rem; color:#bbb; pointer-events:none;
+        }
+        .input-field input {
+            width:100%; padding:13px 14px 13px 42px;
+            border:1.5px solid #e8e8e8; border-radius:9px;
+            font-size:.97rem; font-family:inherit;
+            transition:.25s; background:#fafafa;
+            color:var(--color-texto);
+        }
+        .input-field input:focus { border-color:var(--color-morado); outline:none; box-shadow:0 0 0 3px rgba(106,27,154,.1); background:white; }
+        .input-field input::placeholder { color:#c0c0c0; }
+
+        .input-options { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
+        .remember { display:flex; align-items:center; gap:7px; font-size:.85rem; color:#777; cursor:pointer; }
+        .remember input[type=checkbox] { accent-color:var(--color-morado); cursor:pointer; }
+        .forgot { color:var(--color-morado); font-size:.85rem; font-weight:600; text-decoration:none; transition:.2s; }
+        .forgot:hover { color:var(--color-morado-dark); text-decoration:underline; }
+
+        .btn-submit {
+            width:100%; padding:15px; background:var(--color-morado);
+            color:white; border:none; border-radius:9px;
+            font-size:1rem; font-weight:700; cursor:pointer;
+            font-family:inherit; transition:.3s; letter-spacing:.2px;
+        }
+        .btn-submit:hover { background:var(--color-morado-dark); transform:translateY(-1px); box-shadow:0 6px 20px rgba(106,27,154,.35); }
+        .btn-submit:active { transform:translateY(0); }
+
+        .security-note {
+            display:flex; align-items:center; gap:8px;
+            background:#f0fff4; border:1px solid #c8e6c9;
+            border-radius:8px; padding:12px 14px;
+            margin-top:22px; font-size:.8rem; color:var(--color-verde);
+        }
+
+        .register-link { text-align:center; margin-top:28px; font-size:.88rem; color:#888; }
+        .register-link a { color:var(--color-morado); font-weight:700; text-decoration:none; }
+        .register-link a:hover { text-decoration:underline; }
+
+        @media(max-width:900px) {
+            .login-brand { display:none; }
+            .login-form-container { width:100%; padding:40px 24px; box-shadow:none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LEFT: BRAND -->
+    <div class="login-brand">
+        <div class="brand-top">
+            <img src="logo.jpg" alt="Logo Jurintegra">
+            <span>JURINTEGRA</span>
+        </div>
+
+        <div class="feature-cards">
+            <div class="feature-card">
+                <div class="fc-icon">⛓️</div>
+                <div>
+                    <h4>Protección Blockchain</h4>
+                    <p>Tus documentos quedan registrados de forma permanente e inmutable en la red.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="fc-icon">🔐</div>
+                <div>
+                    <h4>Encriptación Extremo a Extremo</h4>
+                    <p>Nadie, ni siquiera nosotros, puede acceder al contenido de tus contratos.</p>
+                </div>
+            </div>
+            <div class="feature-card">
+                <div class="fc-icon">🧠</div>
+                <div>
+                    <h4>Validación Psicológica</h4>
+                    <p>Psicólogos colegiados certifican el consentimiento de cada firmante.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="brand-footer">
+            © 2026 JURINTEGRA S.A.C. — Lima, Perú
+        </div>
+    </div>
+
+    <!-- RIGHT: FORM -->
+    <div class="login-form-container">
+        <div class="form-wrapper">
+            <div class="form-logo">
+                <a href="index.html"><img src="logo.jpg" alt="Logo Jurintegra"></a>
+                <span>JURINTEGRA</span>
+            </div>
+
+            <div class="form-badge">🔒 Acceso Seguro Verificado</div>
+            <h2>Bienvenido de nuevo</h2>
+            <p>Ingresa a tu bóveda digital y gestiona tus documentos legales.</p>
+
+            <!-- Agregamos id="formulario-login" al form -->
+            <form id="formulario-login" action="dashboard.html" method="get">
+            <div class="input-group">
+                <label>Correo Electrónico</label>
+                <div class="input-field">
+                <span class="field-icon">📧</span>
+                <!-- Agregamos id="email" -->
+                <input type="email" id="email" placeholder="ejemplo@empresa.com" required>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>Contraseña</label>
+                <div class="input-field">
+                <span class="field-icon">🔑</span>
+                <!-- Agregamos id="password" -->
+                <input type="password" id="password" placeholder="........" required>
+                </div>
+            </div>
+
+            <div class="input-options">
+                <label class="remember">
+                <input type="checkbox"> Recordarme
+                </label>
+                <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <button type="submit" class="btn-submit">Ingresar al Panel -></button>
+            </form>
+
+            <!-- Enlaza el archivo JavaScript justo antes de cerrar la etiqueta </body> -->
+            <script src="js/login.js"></script>
+
+            <div class="security-note">
+                🛡️ Conexión cifrada SSL/TLS de 256 bits. Tus datos están protegidos.
+            </div>
+
+            <div class="register-link">
+                ¿No tienes una cuenta? <a href="registro.html">Regístrate gratis</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

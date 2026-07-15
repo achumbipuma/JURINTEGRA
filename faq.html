@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes | Jurintegra S.A.C.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-morado: #6A1B9A;
+            --color-morado-dark: #4a148c;
+            --color-verde: #2E7D32;
+            --color-fondo: #F5F7FA;
+            --color-blanco: #FFFFFF;
+            --color-texto: #2d2d2d;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:var(--color-fondo); color:var(--color-texto); line-height:1.65; font-family:'Inter','Segoe UI',sans-serif; }
+
+        header { background:var(--color-blanco); box-shadow:var(--shadow-sm); position:sticky; top:0; z-index:1000; }
+        nav { display:flex; justify-content:space-between; align-items:center; padding:16px 5%; max-width:1200px; margin:0 auto; }
+        .logo { display:flex; align-items:center; font-size:22px; font-weight:800; color:var(--color-morado); text-decoration:none; gap:10px; }
+        .logo img { height:38px; border-radius:6px; }
+        .nav-links { list-style:none; display:flex; gap:8px; align-items:center; }
+        .nav-links a { text-decoration:none; color:var(--color-texto); font-weight:500; font-size:.92rem; padding:8px 12px; border-radius:6px; transition:.2s; }
+        .nav-links a:hover { background:#f3e5f5; color:var(--color-morado); }
+        .btn-login { background:var(--color-morado)!important; color:white!important; padding:8px 20px!important; border-radius:8px!important; font-weight:700!important; }
+        .menu-toggle { display:none; flex-direction:column; justify-content:space-around; width:28px; height:24px; background:transparent; border:none; cursor:pointer; }
+        .menu-toggle span { width:100%; height:2.5px; background:var(--color-morado); border-radius:10px; }
+
+        /* HERO */
+        .faq-hero {
+            position:relative;
+            padding: 90px 5% 70px;
+            background:
+                linear-gradient(to bottom right, rgba(106,27,154,0.88), rgba(74,20,140,0.92)),
+                url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80&auto=format&fit=crop') center/cover no-repeat;
+            color:white; text-align:center;
+        }
+        .faq-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:60px; background:linear-gradient(to top, var(--color-fondo), transparent); }
+        .faq-hero h1 { font-size:clamp(2rem,4vw,2.8rem); font-weight:800; margin-bottom:14px; }
+        .faq-hero p { font-size:1.05rem; opacity:.9; max-width:520px; margin:0 auto; font-weight:300; }
+
+        /* FAQ */
+        .faq-section { padding:80px 5%; }
+        .faq-inner { max-width:800px; margin:0 auto; }
+        h2.section-title { text-align:center; color:var(--color-morado); font-size:clamp(1.7rem,3vw,2.2rem); font-weight:800; margin-bottom:10px; }
+        .section-subtitle { text-align:center; color:#777; max-width:500px; margin:0 auto 48px; }
+
+        .faq-item { background:var(--color-blanco); margin-bottom:14px; border-radius:var(--radius); box-shadow:var(--shadow-sm); overflow:hidden; transition:.3s; }
+        .faq-item:hover { box-shadow:var(--shadow-md); }
+        .faq-pregunta {
+            padding:22px 24px; cursor:pointer; display:flex; justify-content:space-between;
+            align-items:center; font-weight:600; color:var(--color-texto); transition:.2s;
+            gap:12px;
+        }
+        .faq-pregunta:hover { background:#fafafa; }
+        .faq-pregunta.activa { color:var(--color-morado); background:#f9f4ff; }
+        .faq-icon { width:28px; height:28px; border-radius:50%; background:#f3e5f5; display:flex; align-items:center; justify-content:center; font-size:1.2rem; font-weight:700; color:var(--color-morado); flex-shrink:0; transition:.3s; }
+        .faq-pregunta.activa .faq-icon { background:var(--color-morado); color:white; }
+        .faq-respuesta { padding:0 24px; max-height:0; overflow:hidden; transition:max-height .4s ease, padding .3s ease; background:#fafafa; border-top:1px solid transparent; }
+        .faq-pregunta.activa + .faq-respuesta { border-top:1px solid #f0e6ff; }
+        .faq-respuesta p { padding:20px 0; color:#555; font-size:.95rem; }
+
+        /* IMAGE ASIDE */
+        .faq-extra { padding:0 5% 80px; }
+        .faq-extra-inner { max-width:800px; margin:0 auto; }
+        .still-questions {
+            background: linear-gradient(135deg, var(--color-verde), #1b5e20);
+            color: white; border-radius:var(--radius); padding:44px;
+            display:flex; align-items:center; gap:32px; flex-wrap:wrap;
+        }
+        .still-questions img { width:100px; height:100px; border-radius:50%; object-fit:cover; border:3px solid rgba(255,255,255,.4); flex-shrink:0; }
+        .still-q-text h3 { font-size:1.4rem; font-weight:800; margin-bottom:8px; }
+        .still-q-text p { opacity:.88; margin-bottom:20px; font-size:.95rem; }
+        .btn-white { background:white; color:var(--color-verde); padding:12px 28px; text-decoration:none; border-radius:8px; font-weight:700; transition:.3s; display:inline-block; }
+        .btn-white:hover { background:#f0fff0; transform:translateY(-2px); }
+
+        footer { background:#1a1a2e; color:rgba(255,255,255,.75); padding:40px 5% 24px; }
+        .footer-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+        .footer-brand { font-size:1.2rem; font-weight:800; color:white; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { color:rgba(255,255,255,.65); text-decoration:none; font-size:.9rem; transition:.2s; }
+        .footer-links a:hover { color:white; }
+        .footer-copy { text-align:center; font-size:.85rem; border-top:1px solid rgba(255,255,255,.1); padding-top:20px; max-width:1200px; margin:24px auto 0; }
+
+        @media(max-width:768px){
+            .menu-toggle{display:flex;}
+            .nav-links{position:absolute;top:70px;left:0;right:0;background:white;flex-direction:column;gap:0;height:0;overflow:hidden;transition:height .3s;box-shadow:var(--shadow-md);}
+            .nav-links.active{height:300px;}
+            .nav-links li{width:100%;text-align:center;border-bottom:1px solid #f0f0f0;}
+            .nav-links a{display:block;padding:14px 0;}
+            .still-questions{flex-direction:column;text-align:center;}
+            .footer-inner{flex-direction:column;text-align:center;}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.jpg" alt="Logo Jurintegra"> JURINTEGRA</a>
+            <button class="menu-toggle" id="mobile-menu-btn"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Cómo Funciona</a></li>
+                <li><a href="faq.html" style="color:var(--color-morado);font-weight:700;">FAQ</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="login.html" class="btn-login">Ingresar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="faq-hero">
+        <h1>Preguntas Frecuentes</h1>
+        <p>Resolvemos todas tus dudas sobre nuestra tecnología, servicios y validez legal en el Perú.</p>
+    </div>
+
+    <section class="faq-section">
+        <div class="faq-inner">
+            <h2 class="section-title">Todo lo que necesitas saber</h2>
+            <p class="section-subtitle">Haz clic en cada pregunta para ver la respuesta.</p>
+
+            <div class="faq-item">
+                <div class="faq-pregunta">¿Es legal un contrato guardado en Blockchain en Perú? <span class="faq-icon">+</span></div>
+                <div class="faq-respuesta">
+                    <p>Sí. La legislación peruana reconoce la validez de los contratos electrónicos y las firmas digitales. El registro en Blockchain actúa como una prueba criptográfica inmutable (sello de tiempo y no repudio) que demuestra que el documento existió en una fecha determinada y no ha sido alterado desde entonces.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pregunta">¿Cómo funciona la validación psicológica? <span class="faq-icon">+</span></div>
+                <div class="faq-respuesta">
+                    <p>Para documentos de alta importancia, agendamos una videollamada corta con uno de nuestros psicólogos colegiados. El profesional evalúa que el firmante comprende lo que está firmando y no está bajo amenaza. Una vez aprobado, se adjunta un "Certificado de Consentimiento" al archivo encriptado en la blockchain.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pregunta">¿Qué pasa si modifico una coma del contrato original? <span class="faq-icon">+</span></div>
+                <div class="faq-respuesta">
+                    <p>La tecnología Blockchain genera un código único llamado "Hash" para tu documento. Si modificas aunque sea un espacio o una coma en el archivo original, el código Hash cambiará por completo. Esto evidenciará de inmediato que el documento ha sido adulterado, protegiendo tu integridad legal.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pregunta">¿JURINTEGRA puede leer mis contratos? <span class="faq-icon">+</span></div>
+                <div class="faq-respuesta">
+                    <p>No. Tus documentos son encriptados antes de ser procesados en nuestros sistemas. Nosotros solo registramos en la red Blockchain la huella digital (Hash) de tu documento, garantizando tu absoluta privacidad y secreto comercial. Ni siquiera nuestro equipo técnico tiene acceso al contenido.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pregunta">¿Cuánto tiempo tarda registrar un documento? <span class="faq-icon">+</span></div>
+                <div class="faq-respuesta">
+                    <p>El proceso de encriptación y registro en Blockchain es casi inmediato: menos de 60 segundos para documentos estándar. Si el plan incluye validación psicológica, el tiempo dependerá de la disponibilidad de agenda, generalmente dentro de las siguientes 24-48 horas hábiles.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-pregunta">¿Puedo cancelar mi plan en cualquier momento? <span class="faq-icon">+</span></div>
+                <div class="faq-respuesta">
+                    <p>Sí, puedes cancelar tu suscripción en cualquier momento desde tu panel de control sin penalidades. Los documentos ya registrados en la blockchain permanecen protegidos e inmutables de forma permanente, independientemente de tu plan activo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="faq-extra">
+        <div class="faq-extra-inner">
+            <div class="still-questions">
+                <img src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=200&q=80&auto=format&fit=crop" alt="Asesora de Jurintegra">
+                <div class="still-q-text">
+                    <h3>¿Aún tienes preguntas?</h3>
+                    <p>Nuestro equipo de asesores está disponible para resolver cualquier duda personalizada sobre cómo Jurintegra puede ayudarte.</p>
+                    <a href="contacto.html" class="btn-white">Contáctanos →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">⚖️ JURINTEGRA S.A.C.</div>
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="servicios.html">Servicios</a>
+                <a href="contacto.html">Contacto</a>
+                <a href="legales.html">Términos</a>
+            </div>
+        </div>
+        <div class="footer-copy">© 2026 JURINTEGRA S.A.C. Todos los derechos reservados. Lima, Perú</div>
+    </footer>
+
+    <script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+        document.querySelectorAll('.faq-pregunta').forEach(pregunta => {
+            pregunta.addEventListener('click', () => {
+                const wasActive = pregunta.classList.contains('activa');
+                document.querySelectorAll('.faq-pregunta').forEach(p => {
+                    p.classList.remove('activa');
+                    const r = p.nextElementSibling;
+                    r.style.maxHeight = 0;
+                    p.querySelector('.faq-icon').textContent = '+';
+                });
+                if (!wasActive) {
+                    pregunta.classList.add('activa');
+                    const resp = pregunta.nextElementSibling;
+                    resp.style.maxHeight = resp.scrollHeight + 'px';
+                    pregunta.querySelector('.faq-icon').textContent = '−';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
