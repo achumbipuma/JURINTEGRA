@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Términos y Políticas | Jurintegra S.A.C.</title>
+<<<<<<< HEAD
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -98,10 +99,53 @@
             .nav-links a{display:block;padding:14px 0;}
             .legal-container{padding:28px 20px;}
             .footer-inner{flex-direction:column;text-align:center;}
+=======
+    <style>
+        :root {
+            --color-morado: #6A1B9A; 
+            --color-verde: #2E7D32; 
+            --color-fondo: #F5F7FA;
+            --color-blanco: #FFFFFF;
+            --color-texto: #333333;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--color-fondo); color: var(--color-texto); line-height: 1.6; }
+
+        header { background-color: var(--color-blanco); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--color-morado); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--color-texto); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--color-morado); }
+
+        .legal-header {
+            background-color: var(--color-texto); color: var(--color-blanco);
+            text-align: center; padding: 60px 5%;
+        }
+        
+        .legal-container {
+            max-width: 900px; margin: 40px auto; background: var(--color-blanco);
+            padding: 50px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        h1 { margin-bottom: 10px; }
+        h2 { color: var(--color-morado); margin-top: 30px; margin-bottom: 15px; font-size: 1.4rem; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        
+        p { margin-bottom: 15px; text-align: justify; }
+        ul { margin-bottom: 15px; padding-left: 20px; }
+        li { margin-bottom: 8px; }
+
+        .update-date { font-style: italic; color: #666; margin-bottom: 30px; display: block; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .legal-container { padding: 30px 20px; margin: 20px; }
+>>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
         }
     </style>
 </head>
 <body>
+<<<<<<< HEAD
     <header>
         <nav>
             <a href="index.html" class="logo"><img src="logo.jpg" alt="Logo Jurintegra"> JURINTEGRA S.A.C.</a>
@@ -111,10 +155,22 @@
                 <li><a href="servicios.html">Cómo Funciona</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
                 <li><a href="login.html" class="btn-login">Ingresar</a></li>
+=======
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo"><img src="logo.jpg" alt="Logo Jurintegra" style="height: 35px; margin-right: 10px;"> JURINTEGRA S.A.C.</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Cómo Funciona</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="login.html" style="background-color: var(--color-morado); color: white; padding: 8px 15px; border-radius: 5px;">Ingresar</a></li>
+>>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
             </ul>
         </nav>
     </header>
 
+<<<<<<< HEAD
     <div class="legal-hero">
         <h1>Términos, Condiciones y Políticas de Privacidad</h1>
         <p>Documento legal que regula el uso de los servicios de JURINTEGRA S.A.C. en cumplimiento con la ley peruana.</p>
@@ -184,5 +240,43 @@
             document.getElementById('nav-menu').classList.toggle('active');
         });
     </script>
+=======
+    <div class="legal-header">
+        <h1>Términos, Condiciones y Políticas de Privacidad</h1>
+        <p>Documento legal que regula el uso de los servicios de JURINTEGRA S.A.C.</p>
+    </div>
+
+    <div class="legal-container">
+        <span class="update-date">Última actualización: Julio de 2026</span>
+
+        <h2>1. Aceptación de los Términos</h2>
+        <p>Al acceder y utilizar la plataforma web y los servicios de <strong>JURINTEGRA S.A.C.</strong>, usted acepta estar legalmente vinculado por estos Términos y Condiciones. Si no está de acuerdo con alguno de los términos aquí expuestos, le rogamos que no utilice nuestros servicios.</p>
+
+        <h2>2. Descripción del Servicio</h2>
+        <p>JURINTEGRA S.A.C. ofrece servicios de resguardo y validación de documentos digitales mediante el uso de tecnología Blockchain, firmas digitales y evaluaciones psicológicas de consentimiento. Aclaramos que:</p>
+        <ul>
+            <li><strong>Inmutabilidad Blockchain:</strong> Una vez que un documento es encriptado y registrado en la red Blockchain a través de nuestra plataforma, el código Hash generado es inalterable. JURINTEGRA S.A.C. no puede modificar ni eliminar registros confirmados en la red.</li>
+            <li><strong>Validación Psicológica:</strong> El certificado de evaluación psicológica emitido por nuestros profesionales asociados refleja el estado cognitivo y la voluntad del usuario en el momento exacto de la evaluación. No constituye un dictamen médico permanente.</li>
+        </ul>
+
+        <h2>3. Política de Privacidad y Protección de Datos</h2>
+        <p>En cumplimiento con la <strong>Ley de Protección de Datos Personales (Ley N° 29733)</strong> y su Reglamento en la República del Perú, JURINTEGRA S.A.C. se compromete a salvaguardar la privacidad de sus usuarios:</p>
+        <ul>
+            <li><strong>Recopilación:</strong> Solo recopilamos los datos estrictamente necesarios para la creación de cuentas, facturación y la validación de identidad requerida para las firmas digitales.</li>
+            <li><strong>Confidencialidad de Documentos:</strong> Los documentos originales cargados en nuestra plataforma son encriptados de extremo a extremo. JURINTEGRA S.A.C. no tiene acceso al contenido de sus contratos; únicamente gestionamos la huella criptográfica (Hash) en la red Blockchain.</li>
+            <li><strong>Evaluaciones de Salud Mental:</strong> Los resultados y grabaciones de las evaluaciones psicológicas son estrictamente confidenciales y se manejan bajo el secreto profesional correspondiente, compartiéndose únicamente el "Certificado de Consentimiento" con las partes autorizadas.</li>
+        </ul>
+
+        <h2>4. Responsabilidades del Usuario</h2>
+        <p>El usuario es el único responsable de la legalidad, veracidad y exactitud de los documentos que carga en la plataforma. JURINTEGRA S.A.C. actúa como un intermediario tecnológico y no ofrece asesoría legal ni se responsabiliza por vicios ocultos en los contratos firmados por los usuarios, más allá de la validación del consentimiento en los planes que lo incluyan.</p>
+
+        <h2>5. Propiedad Intelectual</h2>
+        <p>Todo el software, diseño, código, logotipos e interfaz de la plataforma son propiedad exclusiva de JURINTEGRA S.A.C. Queda estrictamente prohibida su reproducción, distribución o modificación sin autorización expresa y por escrito.</p>
+
+        <h2>6. Jurisdicción y Ley Aplicable</h2>
+        <p>Estos Términos y Condiciones se rigen por las leyes de la República del Perú. Cualquier disputa que surja en relación con estos términos o el uso de la plataforma será sometida a la jurisdicción de los jueces y tribunales del Distrito Judicial de Lima.</p>
+    </div>
+
+>>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
 </body>
 </html>

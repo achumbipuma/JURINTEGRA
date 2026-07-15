@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cómo Funciona | Jurintegra S.A.C.</title>
+<<<<<<< HEAD
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -131,10 +132,112 @@
                 <li><a href="servicios.html" style="color:var(--color-morado);font-weight:700;">Cómo Funciona</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
                 <li><a href="login.html" class="btn-login">Ingresar</a></li>
+=======
+    <style>
+        :root {
+            --color-morado: #6A1B9A; 
+            --color-verde: #2E7D32; 
+            --color-fondo: #F5F7FA;
+            --color-blanco: #FFFFFF;
+            --color-texto: #333333;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--color-fondo); color: var(--color-texto); line-height: 1.6; }
+
+        /* Copia aquí el mismo CSS de tu <header> y menú móvil que hicimos antes */
+        header { background-color: var(--color-blanco); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; max-width: 1200px; margin: 0 auto; }
+        .logo { display: flex; align-items: center; font-size: 24px; font-weight: bold; color: var(--color-morado); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 20px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--color-texto); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--color-morado); }
+
+        /* --- Título de la Sección --- */
+        .page-header {
+            text-align: center;
+            padding: 80px 5% 40px;
+            background: var(--color-morado);
+            color: var(--color-blanco);
+        }
+        .page-header h1 { font-size: 2.8rem; margin-bottom: 15px; }
+        .page-header p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+        /* --- Contenedor de Pasos --- */
+        .steps-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .step-card {
+            background: var(--color-blanco);
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--color-morado);
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--color-verde);
+            color: var(--color-blanco);
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
+        }
+
+        .step-card h3 {
+            margin: 20px 0 15px;
+            color: var(--color-morado);
+            font-size: 1.4rem;
+        }
+
+        .step-card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="logo.jpg" alt="Logo Jurintegra" style="height: 35px; margin-right: 10px; border-radius: 8px;"> 
+                JURINTEGRA
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="servicios.html" style="color: var(--color-morado); font-weight: bold;">Cómo Funciona</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="login.html" style="background-color: var(--color-morado); color: white; padding: 8px 15px; border-radius: 5px;">Ingresar</a></li>
+>>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
             </ul>
         </nav>
     </header>
 
+<<<<<<< HEAD
     <div class="page-hero">
         <h1>El Proceso LegalTech de Jurintegra</h1>
         <p>Aseguramos tus documentos legales en 3 simples pasos usando criptografía avanzada y validación humana profesional.</p>
@@ -241,5 +344,35 @@
         const menu = document.getElementById('nav-menu');
         btn.addEventListener('click', () => menu.classList.toggle('active'));
     </script>
+=======
+    <div class="page-header">
+        <h1>El proceso LegalTech</h1>
+        <p>Aseguramos tus documentos legales en 3 simples pasos utilizando criptografía avanzada y validación humana profesional.</p>
+    </div>
+
+    <div class="steps-container">
+        <!-- Paso 1 -->
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Carga y Encriptación</h3>
+            <p>Sube tu contrato en formato PDF o Word desde tu panel de control. El documento se encripta de inmediato en tu dispositivo antes de viajar a nuestros servidores, garantizando total privacidad.</p>
+        </div>
+
+        <!-- Paso 2 -->
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Validación Psicológica</h3>
+            <p>Nuestros psicólogos colegiados realizan una breve entrevista en video a los firmantes para certificar que están actuando por voluntad propia y en pleno uso de sus facultades mentales.</p>
+        </div>
+
+        <!-- Paso 3 -->
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Sello Blockchain</h3>
+            <p>Generamos un código Hash único (huella digital) de tu documento y el certificado de consentimiento. Este registro se graba en la Blockchain, haciéndolo inmutable y legalmente vinculante para siempre.</p>
+        </div>
+    </div>
+
+>>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
 </body>
 </html>

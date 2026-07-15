@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas Frecuentes | Jurintegra S.A.C.</title>
+<<<<<<< HEAD
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -110,10 +111,71 @@
                 <li><a href="faq.html" style="color:var(--color-morado);font-weight:700;">FAQ</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
                 <li><a href="login.html" class="btn-login">Ingresar</a></li>
+=======
+    <style>
+        :root {
+            --color-morado: #6A1B9A; 
+            --color-verde: #2E7D32; 
+            --color-fondo: #F5F7FA;
+            --color-blanco: #FFFFFF;
+            --color-texto: #333333;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--color-fondo); color: var(--color-texto); line-height: 1.6; }
+
+        header { background-color: var(--color-blanco); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--color-morado); text-decoration: none; }
+        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links a { text-decoration: none; color: var(--color-texto); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--color-morado); }
+
+        .faq-header {
+            text-align: center; padding: 60px 5%;
+        }
+        .faq-header h1 { color: var(--color-morado); font-size: 2.5rem; margin-bottom: 10px; }
+
+        .faq-container {
+            max-width: 800px; margin: 0 auto 60px; padding: 0 5%;
+        }
+
+        .faq-item {
+            background: var(--color-blanco); margin-bottom: 15px; border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden;
+        }
+
+        .faq-pregunta {
+            padding: 20px; cursor: pointer; display: flex; justify-content: space-between;
+            align-items: center; font-weight: bold; color: var(--color-texto);
+            transition: background 0.3s;
+        }
+        .faq-pregunta:hover { background-color: #f9f9f9; }
+        .faq-pregunta.activa { color: var(--color-morado); }
+
+        .faq-respuesta {
+            padding: 0 20px; max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            background-color: var(--color-blanco); border-top: 1px solid #eee;
+        }
+        .faq-respuesta p { padding: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">❖ JURINTEGRA</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="servicios.html">Cómo Funciona</a></li>
+                <li><a href="faq.html" style="color: var(--color-morado);">FAQ</a></li>
+                <li><a href="login.html" style="background-color: var(--color-morado); color: white; padding: 8px 15px; border-radius: 5px;">Ingresar</a></li>
+>>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
             </ul>
         </nav>
     </header>
 
+<<<<<<< HEAD
     <div class="faq-hero">
         <h1>Preguntas Frecuentes</h1>
         <p>Resolvemos todas tus dudas sobre nuestra tecnología, servicios y validez legal en el Perú.</p>
@@ -177,10 +239,48 @@
                     <p>Nuestro equipo de asesores está disponible para resolver cualquier duda personalizada sobre cómo Jurintegra puede ayudarte.</p>
                     <a href="contacto.html" class="btn-white">Contáctanos →</a>
                 </div>
+=======
+    <div class="faq-header">
+        <h1>Preguntas Frecuentes</h1>
+        <p>Resolvemos tus dudas sobre nuestra tecnología y servicios.</p>
+    </div>
+
+    <div class="faq-container">
+        <!-- Pregunta 1 -->
+        <div class="faq-item">
+            <div class="faq-pregunta">¿Es legal un contrato guardado en Blockchain en Perú? <span>+</span></div>
+            <div class="faq-respuesta">
+                <p>Sí. La legislación peruana reconoce la validez de los contratos electrónicos y las firmas digitales. El registro en Blockchain actúa como una prueba criptográfica inmutable (sello de tiempo y no repudio) que demuestra que el documento existió en una fecha determinada y no ha sido alterado desde entonces.</p>
+            </div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="faq-item">
+            <div class="faq-pregunta">¿Cómo funciona la validación psicológica? <span>+</span></div>
+            <div class="faq-respuesta">
+                <p>Para documentos de alta importancia, agendamos una videollamada corta con uno de nuestros psicólogos colegiados. El profesional evalúa que el firmante comprende lo que está firmando y no está bajo amenaza. Una vez aprobado, se adjunta un "Certificado de Consentimiento" al archivo encriptado.</p>
+            </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="faq-item">
+            <div class="faq-pregunta">¿Qué pasa si modifico una coma del contrato original? <span>+</span></div>
+            <div class="faq-respuesta">
+                <p>La tecnología Blockchain genera un código único llamado "Hash" para tu documento. Si modificas aunque sea un espacio o una coma en el archivo original, el código Hash cambiará por completo. Esto evidenciará de inmediato que el documento ha sido adulterado.</p>
+            </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="faq-item">
+            <div class="faq-pregunta">¿JURINTEGRA puede leer mis contratos? <span>+</span></div>
+            <div class="faq-respuesta">
+                <p>No. Tus documentos son encriptados antes de ser procesados. Nosotros solo registramos en la red Blockchain la huella digital (Hash) de tu documento, garantizando tu absoluta privacidad y secreto comercial.</p>
+>>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
             </div>
         </div>
     </div>
 
+<<<<<<< HEAD
     <footer>
         <div class="footer-inner">
             <div class="footer-brand">⚖️ JURINTEGRA S.A.C.</div>
@@ -212,6 +312,22 @@
                     const resp = pregunta.nextElementSibling;
                     resp.style.maxHeight = resp.scrollHeight + 'px';
                     pregunta.querySelector('.faq-icon').textContent = '−';
+=======
+    <script>
+        // Lógica para el Acordeón
+        document.querySelectorAll('.faq-pregunta').forEach(pregunta => {
+            pregunta.addEventListener('click', () => {
+                pregunta.classList.toggle('activa');
+                const respuesta = pregunta.nextElementSibling;
+                const icono = pregunta.querySelector('span');
+
+                if (pregunta.classList.contains('activa')) {
+                    respuesta.style.maxHeight = respuesta.scrollHeight + "px";
+                    icono.textContent = "-";
+                } else {
+                    respuesta.style.maxHeight = 0;
+                    icono.textContent = "+";
+>>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
                 }
             });
         });
