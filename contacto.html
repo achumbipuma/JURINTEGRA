@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto | Jurintegra S.A.C.</title>
-<<<<<<< HEAD
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -125,151 +124,24 @@
             .contact-info,.contact-form{padding:32px 24px;}
             .contact-office-img{display:none;}
             .footer-inner{flex-direction:column;text-align:center;}
-=======
-    <style>
-        :root {
-            --color-morado: #6A1B9A; 
-            --color-verde: #2E7D32; 
-            --color-fondo: #F5F7FA;
-            --color-blanco: #FFFFFF;
-            --color-texto: #333333;
-            --color-borde: #E0E0E0;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: var(--color-fondo); color: var(--color-texto); line-height: 1.6; }
-
-        /* --- Header y Menú Móvil --- */
-        header { background-color: var(--color-blanco); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; max-width: 1200px; margin: 0 auto; }
-        .logo { display: flex; align-items: center; font-size: 24px; font-weight: bold; color: var(--color-morado); text-decoration: none; }
-        .nav-links { list-style: none; display: flex; gap: 20px; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--color-texto); font-weight: 500; transition: 0.3s; }
-        .nav-links a:hover { color: var(--color-morado); }
-        .btn-login { background-color: var(--color-morado); color: white !important; padding: 8px 20px; border-radius: 5px; font-weight: bold; transition: 0.3s; }
-        .btn-login:hover { background-color: #4a148c; }
-
-        .menu-toggle { display: none; flex-direction: column; justify-content: space-around; width: 30px; height: 25px; background: transparent; border: none; cursor: pointer; z-index: 1001; }
-        .menu-toggle span { width: 100%; height: 3px; background-color: var(--color-morado); border-radius: 10px; transition: 0.3s; }
-
-        /* --- Contenedor Principal --- */
-        .contact-container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 5%;
-        }
-
-        /* Botón de Regreso */
-        .btn-back {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: var(--color-morado);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-        .btn-back:hover { color: #4a148c; transform: translateX(-5px); }
-
-        /* Grid de Contacto */
-        .contact-grid {
-            display: flex;
-            background: var(--color-blanco);
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-
-        /* Información de Contacto (Izquierda) */
-        .contact-info {
-            flex: 1;
-            background: linear-gradient(135deg, var(--color-morado), #4a148c);
-            color: white;
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .contact-info h2 { font-size: 2rem; margin-bottom: 15px; }
-        .contact-info p { margin-bottom: 30px; opacity: 0.9; }
-        .info-item { margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
-
-        /* Formulario (Derecha) */
-        .contact-form {
-            flex: 1.5;
-            padding: 50px;
-        }
-        .contact-form h3 { color: var(--color-morado); margin-bottom: 20px; font-size: 1.5rem; }
-        
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.95rem; }
-        .input-group input, .input-group textarea {
-            width: 100%; padding: 12px; border: 1px solid var(--color-borde);
-            border-radius: 6px; font-size: 1rem; transition: 0.3s;
-            font-family: inherit;
-        }
-        .input-group input:focus, .input-group textarea:focus {
-            border-color: var(--color-morado); outline: none; box-shadow: 0 0 0 2px rgba(106, 27, 154, 0.1);
-        }
-
-        .btn-submit {
-            background-color: var(--color-verde); color: white; padding: 14px 30px;
-            border: none; border-radius: 6px; font-weight: bold; font-size: 1rem;
-            cursor: pointer; transition: 0.3s; width: 100%;
-        }
-        .btn-submit:hover { background-color: #1b5e20; }
-
-        /* Mensaje de Éxito */
-        #successMsg {
-            display: none; padding: 20px; background: #E8F5E9; color: #2E7D32;
-            border-radius: 6px; text-align: center; border: 1px solid #C8E6C9;
-            font-weight: 500;
-        }
-
-        /* Diseño Responsivo */
-        @media (max-width: 768px) {
-            .menu-toggle { display: flex; }
-            .nav-links { position: absolute; top: 70px; right: 0; background-color: var(--color-blanco); width: 100%; height: 0; flex-direction: column; align-items: center; overflow: hidden; transition: 0.3s; box-shadow: 0 10px 10px rgba(0,0,0,0.1); }
-            .nav-links.active { height: 320px; }
-            .nav-links a { display: block; padding: 15px 0; width: 100%; text-align: center; border-bottom: 1px solid #eee; }
-            .btn-login { margin: 15px auto; width: 80%; }
-            
-            .contact-grid { flex-direction: column; }
-            .contact-info, .contact-form { padding: 30px; }
->>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
         }
     </style>
 </head>
 <body>
-<<<<<<< HEAD
     <header>
         <nav>
             <a href="index.html" class="logo"><img src="logo.jpg" alt="Logo Jurintegra"> JURINTEGRA</a>
-=======
-
-    <!-- Navegación -->
-    <header>
-        <nav>
-            <a href="index.html" class="logo">
-                <img src="logo.jpg" alt="Logo Jurintegra" style="height: 35px; margin-right: 10px; border-radius: 8px;"> 
-                JURINTEGRA
-            </a>
->>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
             <button class="menu-toggle" id="mobile-menu-btn"><span></span><span></span><span></span></button>
             <ul class="nav-links" id="nav-menu">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="nosotros.html">Nosotros</a></li>
                 <li><a href="servicios.html">Cómo Funciona</a></li>
-<<<<<<< HEAD
                 <li><a href="contacto.html" style="color:var(--color-morado);font-weight:700;">Contacto</a></li>
-=======
-                <li><a href="contacto.html" style="color: var(--color-morado); font-weight: bold;">Contacto</a></li>
->>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
                 <li><a href="login.html" class="btn-login">Ingresar</a></li>
             </ul>
         </nav>
     </header>
 
-<<<<<<< HEAD
     <div class="contact-hero">
         <h1>Comunícate con Nosotros</h1>
         <p>¿Tienes dudas sobre cómo proteger tus documentos con Blockchain? Estamos aquí para asesorarte.</p>
@@ -365,73 +237,6 @@
         });
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-=======
-    <!-- Contenido Principal -->
-    <div class="contact-container">
-        
-        <!-- BOTÓN DE REGRESO -->
-        <a href="index.html" class="btn-back">← Volver al Inicio</a>
-
-        <div class="contact-grid">
-            
-            <!-- Columna Izquierda: Información -->
-            <div class="contact-info">
-                <h2>Comunícate con Nosotros</h2>
-                <p>¿Tienes dudas sobre cómo implementar la tecnología Blockchain en tus contratos empresariales? Estamos aquí para ayudarte.</p>
-                
-                <div class="info-item">
-                    📍 Lima, Perú
-                </div>
-                <div class="info-item">
-                    📧 soporte@jurintegra.com.pe
-                </div>
-                <div class="info-item">
-                    📞 +51 987 654 321
-                </div>
-            </div>
-
-            <!-- Columna Derecha: Formulario -->
-            <div class="contact-form">
-                <h3>Envíanos un mensaje</h3>
-                
-                <form id="contactForm">
-                    <div class="input-group">
-                        <label>Nombre Completo</label>
-                        <input type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Correo Electrónico</label>
-                        <input type="email" id="email" placeholder="ejemplo@empresa.com" required>
-                    </div>
-                    <div class="input-group">
-                        <label>¿En qué podemos ayudarte?</label>
-                        <textarea id="mensaje" rows="4" placeholder="Escribe tu consulta aquí..." required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Enviar Mensaje</button>
-                </form>
-
-                <!-- Mensaje de confirmación -->
-                <div id="successMsg">
-                    ¡Gracias por escribirnos! Hemos recibido tu solicitud de forma segura. Un asesor de Jurintegra se comunicará contigo en breve.
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script>
-        // Lógica del Menú Móvil
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const navMenu = document.getElementById('nav-menu');
-        mobileMenuBtn.addEventListener('click', () => navMenu.classList.toggle('active'));
-
-        // Lógica del Formulario Interactivo
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Evita recargar la página
-            
-            // Efecto visual: ocultar formulario y mostrar mensaje de éxito
->>>>>>> 8bcecdbd49a4ec5cb7f2cb89ac10b92f0e5cdecc
             this.style.display = 'none';
             document.getElementById('successMsg').style.display = 'block';
         });
